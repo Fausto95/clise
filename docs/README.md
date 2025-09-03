@@ -190,8 +190,8 @@ src/
 ### Getting Help
 
 - **Documentation**: Start here for comprehensive guides
-- **Issues**: [GitHub Issues](https://github.com/your-username/clise/issues) for bugs and feature requests
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/clise/discussions) for questions and ideas
+- **Issues**: [GitHub Issues](https://github.com/clise-app/clise/issues) for bugs and feature requests
+- **Discussions**: [GitHub Discussions](https://github.com/clise-app/clise/discussions) for questions and ideas
 - **Code Review**: All changes go through peer review
 
 ### Development Setup
@@ -277,4 +277,4 @@ src/
 
 **Welcome to the Clise community! 🎉**
 
-_This documentation is maintained by the community. If you find errors or have suggestions, please [open an issue](https://github.com/your-username/clise/issues) or [submit a PR](https://github.com/your-username/clise/pulls)._
+_This documentation is maintained by the community. If you find errors or have suggestions, please [open an issue](https://github.com/clise-app/clise/issues) or [submit a PR](https://github.com/clise-app/clise/pulls)._

@@ -274,4 +274,4 @@ We follow [Semantic Versioning](https://semver.org/):
 
 ---
 
-_This changelog is maintained by the Clise team and community. For questions about releases, please [open an issue](https://github.com/your-username/clise/issues) or [start a discussion](https://github.com/your-username/clise/discussions)._
+_This changelog is maintained by the Clise team and community. For questions about releases, please [open an issue](https://github.com/clise-app/clise/issues) or [start a discussion](https://github.com/clise-app/clise/discussions)._

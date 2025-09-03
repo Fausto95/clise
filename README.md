@@ -14,7 +14,7 @@ A modern design canvas that delivers 60fps performance with 1000+ elements. Buil
 ## Features
 
 - **Design Tools**: Rectangle, ellipse, text, frame, and path tools
-- **Advanced Styling**: Gradients, shadows, blur effects, and stroke styles  
+- **Advanced Styling**: Gradients, shadows, blur effects, and stroke styles
 - **60fps Performance**: Smooth rendering with 1000+ elements
 - **Smart Caching**: Optimized memory usage and resource pooling
 - **Keyboard Shortcuts**: Power-user friendly shortcuts
@@ -24,7 +24,7 @@ A modern design canvas that delivers 60fps performance with 1000+ elements. Buil
 
 ```bash
 # Clone and setup
-git clone https://github.com/your-username/clise.git
+git clone https://github.com/clise-app/clise.git
 cd clise
 pnpm install
 
@@ -36,17 +36,18 @@ Open `http://localhost:5173` in your browser.
 
 ## Usage
 
-| Tool | Shortcut | Description |
-|------|----------|-------------|
-| Select | `V` | Select and manipulate elements |
-| Rectangle | `R` | Draw rectangles |
-| Ellipse | `E` | Draw circles and ovals |
-| Frame | `F` | Create container frames |
-| Text | `T` | Add text elements |
+| Tool      | Shortcut | Description                    |
+| --------- | -------- | ------------------------------ |
+| Select    | `V`      | Select and manipulate elements |
+| Rectangle | `R`      | Draw rectangles                |
+| Ellipse   | `E`      | Draw circles and ovals         |
+| Frame     | `F`      | Create container frames        |
+| Text      | `T`      | Add text elements              |
 
 ### Key Shortcuts
+
 - `Ctrl/Cmd + A` - Select all
-- `Ctrl/Cmd + C/V` - Copy/paste  
+- `Ctrl/Cmd + C/V` - Copy/paste
 - `Ctrl/Cmd + D` - Duplicate
 - `Delete` - Delete selected
 - `Ctrl/Cmd + 0` - Reset zoom
@@ -56,14 +57,15 @@ Open `http://localhost:5173` in your browser.
 **Technologies**: React 19, TypeScript, CanvasKit-WASM, Jotai, Vite
 
 **Performance Optimizations**:
+
 - Paint Pooling (60-80% fewer allocations)
-- Smart Caching (filters, paths, colors)  
+- Smart Caching (filters, paths, colors)
 - View Culling (skip off-screen elements)
 
 ```
 src/
 ├── canvas/          # Rendering system
-├── components/      # UI components  
+├── components/      # UI components
 ├── panels/         # App panels
 ├── store/          # State (Jotai atoms)
 └── utils/          # Utilities
@@ -71,7 +73,7 @@ src/
 
 ## Documentation
 
-- [Architecture Guide](docs/ARCHITECTURE.md) - System design  
+- [Architecture Guide](docs/ARCHITECTURE.md) - System design
 - [Performance Guide](docs/PERFORMANCE_OPTIMIZATIONS.md) - Optimization strategies
 - [Contributing Guide](CONTRIBUTING.md) - How to contribute
 
@@ -79,7 +81,7 @@ src/
 
 1. Fork and clone the repository
 2. Create a feature branch: `git checkout -b feature/name`
-3. Make changes and add tests  
+3. Make changes and add tests
 4. Submit a pull request
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.

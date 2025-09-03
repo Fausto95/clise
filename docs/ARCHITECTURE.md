@@ -373,8 +373,8 @@ describe("RectangleRenderer", () => {
 
 We welcome contributions to improve the architecture! Here's how you can help:
 
-1. **Report Issues**: Found an architectural problem? [Open an issue](https://github.com/your-username/clise/issues)
-2. **Suggest Improvements**: Have ideas for better patterns? [Start a discussion](https://github.com/your-username/clise/discussions)
+1. **Report Issues**: Found an architectural problem? [Open an issue](https://github.com/clise-app/clise/issues)
+2. **Suggest Improvements**: Have ideas for better patterns? [Start a discussion](https://github.com/clise-app/clise/discussions)
 3. **Submit PRs**: Implement architectural improvements
 4. **Improve Documentation**: Help make this guide better
 
@@ -382,4 +382,4 @@ We welcome contributions to improve the architecture! Here's how you can help:
 
 **Happy architecting! 🏗️**
 
-_This architecture guide is maintained by the Clise community. If you have questions or suggestions, please [open an issue](https://github.com/your-username/clise/issues) or [start a discussion](https://github.com/your-username/clise/discussions)._
+_This architecture guide is maintained by the Clise community. If you have questions or suggestions, please [open an issue](https://github.com/clise-app/clise/issues) or [start a discussion](https://github.com/clise-app/clise/discussions)._

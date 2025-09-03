@@ -516,7 +516,7 @@ Contributors are recognized in:
 - **[Architecture Documentation](docs/ARCHITECTURE.md)** - System design
 - **[Performance Guide](docs/PERFORMANCE_OPTIMIZATIONS.md)** - Optimization strategies
 - **[Rendering System](docs/RENDERING_SYSTEM.md)** - Canvas implementation
-- **[GitHub Discussions](https://github.com/your-username/clise/discussions)** - Community discussions
+- **[GitHub Discussions](https://github.com/clise-app/clise/discussions)** - Community discussions
 
 ## 🙏 Thank You
 
@@ -526,4 +526,4 @@ Thank you for contributing to Clise! Your contributions help make this project b
 
 **Happy coding! 🎉**
 
-_If you have questions about contributing, feel free to ask in [GitHub Discussions](https://github.com/your-username/clise/discussions) or [open an issue](https://github.com/your-username/clise/issues)._
+_If you have questions about contributing, feel free to ask in [GitHub Discussions](https://github.com/clise-app/clise/discussions) or [open an issue](https://github.com/clise-app/clise/issues)._
