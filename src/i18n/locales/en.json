@@ -193,14 +193,14 @@
 		}
 	},
 	"touchDevice": {
-		"title": "Touch Support Coming Soon",
-		"description": "We're working hard to bring you an amazing touch experience. Currently, Clise is optimized for desktop use with mouse and keyboard.",
+		"title": "Mobile Support Coming Soon",
+		"description": "We're working hard to bring Clise to mobile devices. Currently, Clise is optimized for desktop use with mouse and keyboard.",
 		"features": {
 			"title": "Coming Soon:",
 			"items": [
+				"Mobile-optimized interface",
 				"Touch gestures for drawing",
 				"Multi-touch zoom and pan",
-				"Mobile-optimized interface",
 				"Touch-friendly tools"
 			]
 		},

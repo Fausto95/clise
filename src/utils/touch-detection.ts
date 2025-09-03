@@ -37,5 +37,6 @@ export function isTouchDevice(): boolean {
  * @returns true if the device appears to be mobile, false otherwise
  */
 export function isMobileDevice(): boolean {
+	// Check for touch capability and small screen size (typical for phones)
 	return isTouchDevice() && window.innerWidth <= 768;
 }

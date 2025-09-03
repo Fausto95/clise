@@ -179,14 +179,14 @@
 		}
 	},
 	"touchDevice": {
-		"title": "Suporte a toque em breve",
-		"description": "Estamos trabalhando duro para trazer uma experiência de toque incrível. Atualmente, Clise é otimizado para uso em desktop com mouse e teclado.",
+		"title": "Suporte mobile em breve",
+		"description": "Estamos trabalhando duro para trazer Clise aos dispositivos móveis. Atualmente, Clise é otimizado para uso em desktop com mouse e teclado.",
 		"features": {
 			"title": "Em breve:",
 			"items": [
+				"Interface otimizada para mobile",
 				"Gestos de toque para desenhar",
 				"Zoom e panorâmica multi-toque",
-				"Interface otimizada para mobile",
 				"Ferramentas adaptadas ao toque"
 			]
 		},

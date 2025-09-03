@@ -179,14 +179,14 @@
 		}
 	},
 	"touchDevice": {
-		"title": "Support tactile bientôt disponible",
-		"description": "Nous travaillons dur pour vous offrir une expérience tactile incroyable. Actuellement, Clise est optimisé pour une utilisation sur ordinateur avec souris et clavier.",
+		"title": "Support mobile bientôt disponible",
+		"description": "Nous travaillons dur pour apporter Clise aux appareils mobiles. Actuellement, Clise est optimisé pour une utilisation sur ordinateur avec souris et clavier.",
 		"features": {
 			"title": "Bientôt disponible :",
 			"items": [
+				"Interface optimisée mobile",
 				"Gestes tactiles pour dessiner",
 				"Zoom et panoramique multi-touch",
-				"Interface optimisée mobile",
 				"Outils adaptés au tactile"
 			]
 		},

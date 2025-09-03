@@ -6,8 +6,8 @@ interface TouchDeviceMessageProps {
 }
 
 /**
- * Component that displays a message to users on touch devices
- * informing them that touch support is coming soon
+ * Component that displays a message to users on mobile devices
+ * informing them that mobile support is coming soon
  */
 export function TouchDeviceMessage({
 	className = "",

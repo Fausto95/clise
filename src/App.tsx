@@ -11,7 +11,7 @@ import { useBrowserControls } from "./modules/browser-controls";
 import { useDragDrop, DragDropManager } from "./modules/drag-drop-manager";
 import { usePersistence } from "./modules/persistence-manager";
 import { useIslandKeyboardShortcuts } from "./utils/island-keyboard-shortcuts";
-import { isTouchDevice } from "./utils/touch-detection";
+import { isMobileDevice } from "./utils/touch-detection";
 
 function AppContent() {
 	useAppInitialization();
@@ -33,8 +33,8 @@ function AppContent() {
 }
 
 export function App() {
-	// Check if this is a touch device
-	if (isTouchDevice()) {
+	// Check if this is a mobile device
+	if (isMobileDevice()) {
 		return <TouchDeviceMessage />;
 	}
 
