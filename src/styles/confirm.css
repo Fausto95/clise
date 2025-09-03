@@ -1,0 +1,77 @@
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes scale-in {
+	from {
+		transform: scale(0.98);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+.confirm-overlay {
+	animation: fade-in 120ms ease-out;
+	position: fixed;
+	inset: 0;
+	background: var(--overlay-dark);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+.confirm-modal {
+	animation: scale-in 140ms ease-out forwards;
+	color: var(--text-primary);
+	background: var(--bg-secondary);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	width: min(480px, calc(100% - 32px));
+	box-shadow: var(--shadow-lg);
+}
+
+.confirm-header {
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--border);
+}
+.confirm-title {
+	margin: 0;
+	font-size: 16px;
+}
+.confirm-body {
+	padding: 14px 16px;
+}
+.confirm-actions {
+	padding: 12px 16px;
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	border-top: 1px solid var(--border);
+}
+
+.btn {
+	padding: 8px 12px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.btn:focus {
+	outline: none;
+	box-shadow: var(--focus-ring);
+}
+.btn-primary {
+	background: var(--primary);
+	color: var(--text-primary);
+	border: 1px solid var(--border-focus);
+}
+.btn-secondary {
+	background: var(--bg-secondary);
+	color: #212529;
+	border: 1px solid #ced4da;
+}

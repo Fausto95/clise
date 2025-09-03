@@ -1,0 +1,238 @@
+/* Gradient Section Styles */
+
+.gradient-stops-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+	font-weight: 500;
+	font-size: 13px;
+	color: var(--text-primary);
+}
+
+.gradient-stops-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.gradient-stop {
+	border: 1px solid var(--border-color);
+	border-radius: 6px;
+	padding: 12px;
+	background: var(--bg-secondary);
+}
+
+.gradient-stop-controls {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.gradient-stop-position {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.position-slider {
+	flex: 1;
+	height: 4px;
+	background: var(--bg-tertiary);
+	border-radius: 2px;
+	outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.position-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: var(--primary-color);
+	cursor: pointer;
+	border: 2px solid var(--bg-primary);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.position-slider::-moz-range-thumb {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: var(--primary-color);
+	cursor: pointer;
+	border: 2px solid var(--bg-primary);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.position-value {
+	font-size: 12px;
+	color: var(--text-secondary);
+	min-width: 32px;
+	text-align: right;
+}
+
+.icon-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.icon-button:hover {
+	background: var(--bg-tertiary);
+	border-color: var(--border-hover);
+}
+
+.icon-button-danger {
+	border-color: var(--danger-color);
+	color: var(--danger-color);
+}
+
+.icon-button-danger:hover {
+	background: rgba(239, 68, 68, 0.1);
+	border-color: var(--danger-color);
+}
+
+.gradient-preview-section {
+	margin-top: 16px;
+}
+
+.gradient-preview-bar {
+	width: 100%;
+	height: 32px;
+	border-radius: 6px;
+	border: 1px solid var(--border-color);
+	background-size: cover;
+}
+
+.mesh-gradient-info {
+	padding: 16px;
+	border-radius: 6px;
+	background: var(--bg-secondary);
+	border: 1px solid var(--border-color);
+}
+
+.gradient-info-text {
+	margin: 0 0 8px 0;
+	font-size: 13px;
+	color: var(--text-secondary);
+	line-height: 1.4;
+}
+
+.mesh-control-points {
+	font-size: 12px;
+	color: var(--text-tertiary);
+}
+
+/* Modern Range Input Styling */
+input[type="range"] {
+	width: 100%;
+	height: 6px;
+	background: #4f46e5;
+	border-radius: 3px;
+	outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+	position: relative;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #4f46e5;
+	cursor: pointer;
+	border: 3px solid white;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	transition: all 0.15s ease;
+	position: relative;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+	transform: scale(1.1);
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+	transform: scale(0.95);
+}
+
+input[type="range"]::-moz-range-thumb {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #4f46e5;
+	cursor: pointer;
+	border: 3px solid white;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	-moz-appearance: none;
+	appearance: none;
+}
+
+input[type="range"]::-moz-range-track {
+	height: 6px;
+	background: #4f46e5;
+	border-radius: 3px;
+	border: none;
+}
+
+input[type="range"]:focus {
+	outline: none;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+	box-shadow:
+		0 2px 6px rgba(0, 0, 0, 0.15),
+		0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Gradient control specific styling */
+.gradient-slider {
+	margin: 8px 0;
+}
+
+.gradient-control-label {
+	font-size: 13px;
+	color: var(--text-primary);
+	font-weight: 500;
+	margin-bottom: 6px;
+	display: block;
+}
+
+.gradient-control-group {
+	margin-bottom: 16px;
+}
+
+.gradient-linear-controls,
+.gradient-radial-controls {
+	padding: 12px 0;
+	border-top: 1px solid var(--border-color);
+}
+
+.gradient-mesh-info {
+	padding: 16px;
+	border-radius: 8px;
+	background: var(--bg-secondary);
+	border: 1px solid var(--border-color);
+	margin-top: 12px;
+}
+
+.gradient-info-text {
+	margin: 0;
+	font-size: 13px;
+	color: var(--text-secondary);
+	line-height: 1.4;
+}

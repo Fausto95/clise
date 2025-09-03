@@ -1,0 +1,130 @@
+/* Color Input - compact combined control */
+.color-input-inline {
+	position: relative;
+	display: block;
+	width: 100%;
+	min-width: 0;
+}
+
+.color-composite {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	height: 32px;
+	padding: 0 8px 0 6px;
+	border-radius: 6px;
+	background: var(--bg-tertiary);
+	color: var(--text-primary);
+	/* border: 1px solid rgba(255, 255, 255, 0.2); */
+	width: 100%;
+	max-width: 100%;
+	min-width: 0; /* allow shrinking in grid/flex containers */
+	box-sizing: border-box;
+}
+
+.color-composite:focus-within {
+	border-color: var(--border-focus);
+	box-shadow: 0 0 0 2px var(--primary);
+}
+
+.color-swatch-btn {
+	width: 22px;
+	height: 22px;
+	padding: 0;
+	border-radius: 4px;
+	border: 1px solid var(--border);
+	background:
+		linear-gradient(45deg, var(--gray-6) 25%, transparent 25%),
+		linear-gradient(-45deg, var(--gray-6) 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, var(--gray-6) 75%),
+		linear-gradient(-45deg, transparent 75%, var(--gray-6) 75%);
+	background-size: 8px 8px;
+	background-position:
+		0 0,
+		0 4px,
+		4px -4px,
+		-4px 0px;
+	cursor: pointer;
+	position: relative;
+	flex-shrink: 0;
+}
+
+.color-swatch-btn:hover {
+	border-color: var(--border-hover);
+}
+
+.color-swatch-preview {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 3px;
+}
+
+.hex-field {
+	flex: 1 1 auto;
+	min-width: 0;
+	border: none;
+	background: transparent;
+	color: var(--text-primary);
+	font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+	font-size: 12px;
+	height: 100%;
+}
+
+.hex-field::placeholder {
+	color: var(--text-muted);
+}
+
+.hex-field:focus {
+	outline: none;
+}
+
+.color-divider {
+	width: 1px;
+	height: 18px;
+	background: var(--border);
+}
+
+.opacity-field {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.opacity-prefix {
+	font-size: 12px;
+	color: var(--text-muted);
+}
+
+.opacity-input {
+	width: 4ch; /* fits 0..100 */
+	min-width: 3ch;
+	max-width: 5ch;
+	text-align: right;
+	border: none;
+	background: transparent;
+	color: var(--text-primary);
+	font-size: 12px;
+}
+
+.opacity-input:focus {
+	outline: none;
+}
+
+.color-picker-hidden {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+	width: 0;
+	height: 0;
+}
+
+/* Remove number spinners to keep compact width */
+.opacity-input::-webkit-outer-spin-button,
+.opacity-input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+.opacity-input[type="number"] {
+	-moz-appearance: textfield;
+}

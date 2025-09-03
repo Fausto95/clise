@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"lib": ["ES2022", "DOM"],
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"jsx": "react-jsx",
+		"strict": true,
+		"skipLibCheck": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitAny": true,
+		"noUncheckedIndexedAccess": true,
+		"noFallthroughCasesInSwitch": true,
+		"erasableSyntaxOnly": false,
+		"strictNullChecks": true,
+		"verbatimModuleSyntax": true,
+		"baseUrl": ".",
+		"paths": {
+			"@store/*": ["src/store/*"],
+			"@components/*": ["src/components/*"],
+			"@canvas/*": ["src/canvas/*"],
+			"@panels/*": ["src/panels/*"],
+			"@utils/*": ["src/utils/*"],
+			"@context-menu/*": ["src/context-menu/*"]
+		}
+	}
+}

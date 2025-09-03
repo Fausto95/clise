@@ -1,0 +1,159 @@
+.canvas {
+	background: var(--bg-canvas);
+	position: relative;
+	overflow: hidden;
+	border-radius: 0;
+	width: 100%;
+	height: 100%;
+	cursor: crosshair;
+	transition: cursor 0.2s ease;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.canvas:focus {
+	outline: none;
+}
+
+.canvas-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.floating-tools {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	z-index: 100;
+}
+
+.floating-tools > * {
+	pointer-events: auto;
+	position: absolute;
+}
+
+/* Position LayersPanel on the left */
+.floating-tools .layers-panel {
+	left: 16px;
+	top: 82px;
+	bottom: 16px;
+	width: 280px;
+}
+
+/* Position BottomToolbar in the center bottom */
+.floating-tools .bottom-toolbar {
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 70px;
+}
+
+/* Position InspectorPanel on the right */
+.floating-tools .inspector-panel {
+	right: 16px;
+	top: 16px;
+	bottom: 16px;
+	width: 340px;
+}
+
+/* Mobile responsive layout */
+@media (max-width: 768px) {
+	/* Stack panels vertically on mobile */
+	.floating-tools .layers-panel {
+		left: 8px;
+		right: 8px;
+		top: 58px;
+		bottom: auto;
+		height: 200px;
+		width: auto;
+	}
+
+	.floating-tools .bottom-toolbar {
+		bottom: 8px;
+		left: 8px;
+		right: 8px;
+		transform: none;
+		height: 60px;
+	}
+
+	.floating-tools .inspector-panel {
+		left: 8px;
+		right: 8px;
+		top: auto;
+		bottom: 80px;
+		height: 200px;
+		width: auto;
+	}
+}
+
+/* Infinite canvas scrollbars */
+.canvas-container::-webkit-scrollbar {
+	display: none;
+}
+
+.canvas-container {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.canvas.dragging * {
+	pointer-events: none;
+}
+
+/* Canvas empty state */
+.canvas-empty-state {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: var(--text-secondary);
+	pointer-events: none;
+}
+
+.tool-suggestions {
+	display: flex;
+	gap: 24px;
+	margin-top: 24px;
+}
+
+.tool-suggestion {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	padding: 16px;
+	border-radius: 12px;
+	background: var(--overlay-light);
+	backdrop-filter: blur(10px);
+	border: 1px solid var(--border);
+	transition: all 0.3s ease;
+	animation: slideIn 0.6s ease-out;
+}
+
+.tool-suggestion:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+	border-color: var(--primary);
+}
+
+.tool-suggestion svg {
+	color: var(--primary);
+}
+
+.tool-suggestion span {
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--text-primary);
+}

@@ -1,0 +1,110 @@
+/* Keyboard shortcuts */
+.keyboard-shortcuts {
+	position: fixed;
+	bottom: 80px;
+	right: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	z-index: 100;
+}
+
+.shortcut {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	background: var(--overlay-light);
+	backdrop-filter: blur(10px);
+	border-radius: 8px;
+	font-size: 12px;
+	color: var(--text-primary);
+	box-shadow: var(--shadow-sm);
+	transition: all 0.2s ease;
+	opacity: 0.7;
+}
+
+.shortcut:hover {
+	opacity: 1;
+	transform: translateX(-4px);
+}
+
+.shortcut kbd {
+	background: var(--primary);
+	color: var(--text-primary);
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 10px;
+	font-weight: 600;
+	min-width: 16px;
+	text-align: center;
+}
+
+/* Position indicator */
+.position-indicator {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 100;
+}
+
+.position-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 8px 12px;
+	background: var(--overlay-dark);
+	backdrop-filter: blur(10px);
+	border-radius: 8px;
+	font-size: 11px;
+	color: var(--text-primary);
+	box-shadow: var(--shadow-sm);
+	font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+}
+
+.position-info span {
+	white-space: nowrap;
+}
+
+/* Pan notch (top-center overlay when panning) */
+.pan-notch {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	transform: translate(-50%, -6px);
+	z-index: 110;
+	opacity: 0;
+	transition:
+		opacity 120ms ease,
+		transform 120ms ease;
+	pointer-events: none;
+}
+
+.pan-notch.visible {
+	opacity: 1;
+	transform: translate(-50%, 0);
+}
+
+.pan-notch-content {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	padding: 8px 16px; /* more padding to match bottom toolbar */
+	background: var(--bg-secondary); /* match bottom toolbar background */
+	backdrop-filter: blur(10px);
+	border-radius: 16px; /* match bottom toolbar radius */
+	box-shadow: var(--shadow-lg); /* match bottom toolbar shadow */
+	border: 1px solid var(--border); /* match bottom toolbar border */
+	font-size: 11px;
+	color: var(--text-primary);
+	font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+}
+
+.pan-notch-content span {
+	white-space: nowrap;
+}
+.pan-notch-content .pan-notch-xy {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}

@@ -1,0 +1,155 @@
+/* Cute animations */
+@keyframes bounce {
+	0%,
+	20%,
+	53%,
+	80%,
+	100% {
+		transform: translate3d(0, 0, 0);
+	}
+	40%,
+	43% {
+		transform: translate3d(0, -8px, 0);
+	}
+	70% {
+		transform: translate3d(0, -4px, 0);
+	}
+	90% {
+		transform: translate3d(0, -2px, 0);
+	}
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Empty states */
+.empty-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 20px;
+	text-align: center;
+	color: var(--text-secondary);
+}
+
+.empty-icon {
+	font-size: 48px;
+	margin-bottom: 16px;
+	animation: bounce 2s infinite;
+}
+
+.empty-state h3 {
+	margin: 0 0 8px 0;
+	color: var(--text-primary);
+	font-weight: 600;
+}
+
+.empty-state p {
+	margin: 0 0 24px 0;
+	font-size: 14px;
+}
+
+.empty-state small {
+	font-size: 12px;
+	opacity: 0.7;
+}
+
+/* Drag and drop overlay */
+.drag-drop-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: var(--overlay-dark);
+	backdrop-filter: blur(10px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 2000;
+	animation: fadeIn 0.2s ease-out;
+}
+
+.drag-drop-content {
+	background: var(--bg-secondary);
+	border: 2px dashed var(--primary);
+	border-radius: 24px;
+	padding: 48px;
+	text-align: center;
+	max-width: 400px;
+	animation: scaleIn 0.3s ease-out;
+}
+
+.drag-drop-icon {
+	margin-bottom: 24px;
+	animation: bounce 1s infinite;
+}
+
+.drag-drop-icon svg {
+	color: var(--primary);
+}
+
+.drag-drop-content h2 {
+	margin: 0 0 12px 0;
+	font-size: 24px;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+.drag-drop-content p {
+	margin: 0;
+	font-size: 16px;
+	color: var(--text-secondary);
+}

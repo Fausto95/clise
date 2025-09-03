@@ -1,0 +1,143 @@
+/* Touch Device Message Styles */
+.touch-device-message {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, var(--gray-8) 0%, var(--gray-7) 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+	padding: 2rem;
+	box-sizing: border-box;
+}
+
+.touch-device-content {
+	background: var(--bg-secondary);
+	border: 1px solid var(--border);
+	border-radius: 16px;
+	padding: 3rem 2rem;
+	max-width: 500px;
+	width: 100%;
+	text-align: center;
+	box-shadow: var(--shadow-lg);
+	backdrop-filter: blur(10px);
+	animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.touch-device-icon {
+	color: var(--primary);
+	margin-bottom: 1.5rem;
+	display: flex;
+	justify-content: center;
+}
+
+.touch-device-icon svg {
+	width: 64px;
+	height: 64px;
+}
+
+.touch-device-title {
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--text-primary);
+	margin: 0 0 1rem 0;
+	line-height: 1.2;
+}
+
+.touch-device-description {
+	font-size: 1.1rem;
+	color: var(--text-secondary);
+	line-height: 1.6;
+	margin: 0 0 2rem 0;
+}
+
+.touch-device-features {
+	text-align: left;
+	background: var(--bg-hover);
+	border-radius: 8px;
+	padding: 1.5rem;
+	margin: 2rem 0;
+}
+
+.touch-device-features h3 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--text-primary);
+	margin: 0 0 1rem 0;
+}
+
+.touch-device-features ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.touch-device-features li {
+	padding: 0.5rem 0;
+	color: var(--text-primary);
+	position: relative;
+	padding-left: 1.5rem;
+}
+
+.touch-device-features li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	color: var(--success);
+	font-weight: bold;
+}
+
+.touch-device-footer {
+	font-size: 1rem;
+	color: var(--primary);
+	margin: 1.5rem 0 0 0;
+	font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+	.touch-device-message {
+		padding: 1rem;
+	}
+
+	.touch-device-content {
+		padding: 2rem 1.5rem;
+	}
+
+	.touch-device-title {
+		font-size: 1.75rem;
+	}
+
+	.touch-device-description {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.touch-device-content {
+		padding: 1.5rem 1rem;
+	}
+
+	.touch-device-title {
+		font-size: 1.5rem;
+	}
+
+	.touch-device-icon svg {
+		width: 48px;
+		height: 48px;
+	}
+}

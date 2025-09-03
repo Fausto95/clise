@@ -1,0 +1,191 @@
+/* Floating tools positioning is now handled in canvas.css */
+
+/* Update tools panel styles for floating design */
+.floating-tools .bottom {
+	background: var(--bg-secondary);
+	border-radius: 16px;
+	padding: 8px 16px;
+	box-shadow: var(--shadow-lg);
+	backdrop-filter: blur(10px);
+	border: 1px solid var(--border);
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	min-width: fit-content;
+}
+
+.floating-tools .tools-section {
+	display: flex;
+	gap: 6px;
+	justify-content: center;
+	align-items: center;
+}
+
+.floating-tools .tool-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	width: 32px;
+	height: 32px;
+	border: none;
+	border-radius: 8px;
+	color: var(--text-primary);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	backdrop-filter: blur(10px);
+	padding: 0;
+}
+
+.floating-tools .tool-button:hover {
+	background: var(--bg-tertiary);
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.floating-tools .tool-button.active {
+	background: var(--bg-tertiary);
+	border-color: var(--bg-tertiary);
+	transform: translateY(-1px);
+}
+
+.floating-tools .tool-button svg {
+	width: 20px;
+	height: 20px;
+}
+
+.floating-tools .zoom-section {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-left: 0;
+}
+
+.floating-tools .zoom-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: none;
+	border-radius: 8px;
+	background: transparent;
+	color: var(--text-primary);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	backdrop-filter: blur(10px);
+}
+
+.floating-tools .zoom-button:hover {
+	background: var(--bg-tertiary);
+	transform: scale(1.1);
+}
+
+.floating-tools .zoom-display {
+	font-weight: 600;
+	color: var(--text-primary);
+	min-width: 36px;
+	text-align: center;
+	font-size: 12px;
+}
+
+.floating-tools .renderer-section {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-left: 0;
+}
+
+.floating-tools .renderer-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: none;
+	border-radius: 8px;
+	background: transparent;
+	color: var(--text-primary);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	backdrop-filter: blur(10px);
+}
+
+.floating-tools .renderer-button:hover {
+	background: var(--bg-tertiary);
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.floating-tools .renderer-button.active {
+	background: var(--bg-tertiary);
+	border-color: var(--bg-tertiary);
+	transform: translateY(-1px);
+	color: var(--warning); /* Color to indicate GPU acceleration */
+}
+
+.floating-tools .renderer-button svg {
+	width: 16px;
+	height: 16px;
+}
+
+/* Mobile responsive tools */
+@media (max-width: 768px) {
+	/* Mobile responsive positioning is handled in canvas.css */
+
+	.floating-tools .bottom {
+		padding: 6px 12px;
+		height: 70px;
+		width: 100%;
+		justify-content: center;
+	}
+
+	.floating-tools .tools-section {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 4px;
+	}
+
+	.floating-tools .tool-button {
+		width: 40px;
+		height: 40px;
+		padding: 0;
+	}
+
+	.floating-tools .tool-button svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.floating-tools .zoom-section {
+		margin-left: 12px;
+		gap: 6px;
+	}
+
+	.floating-tools .zoom-button {
+		width: 28px;
+		height: 28px;
+	}
+
+	.floating-tools .zoom-display {
+		min-width: 32px;
+		font-size: 11px;
+	}
+
+	.floating-tools .renderer-section {
+		margin-left: 8px;
+		gap: 4px;
+	}
+
+	.floating-tools .renderer-button {
+		width: 28px;
+		height: 28px;
+	}
+
+	.floating-tools .renderer-button svg {
+		width: 14px;
+		height: 14px;
+	}
+}
