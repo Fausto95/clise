@@ -2,7 +2,7 @@
 
 <div align="center">
   <img src=".github/assets/clise.png" alt="Clise Logo" width="1420" height="1200">
-  <p>A high-performance design canvas built with React and CanvasKit-WASM</p>
+  <p>A high-performance design canvas built with React and CanvasKit-WASM.</p>
 </div>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
