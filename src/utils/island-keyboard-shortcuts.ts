@@ -106,13 +106,17 @@ export const useIslandKeyboardShortcuts = () => {
 
 			// When Cmd+Shift is released, travel to selected island and close switcher
 			if (event.key === "Meta" || event.key === "Shift") {
-				if (islands.length > 0) {
+				if (
+					islands.length > 0 &&
+					currentIndex[0] >= 0 &&
+					currentIndex[0] < islands.length
+				) {
 					const selectedIsland = islands[currentIndex[0]];
 					if (selectedIsland) {
 						travelToIsland(selectedIsland);
 					}
-					closeSwitcher();
 				}
+				closeSwitcher();
 			}
 		},
 		[hasIslands, isOpen, islands, currentIndex, travelToIsland, closeSwitcher],
