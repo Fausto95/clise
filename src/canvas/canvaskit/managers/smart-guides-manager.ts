@@ -5,6 +5,7 @@ export interface SmartGuidesManagerDependencies {
 	elements: Element[];
 	selectedElementIds: string[];
 	tolerance: number;
+	previousPosition?: { x: number; y: number };
 }
 
 export class SmartGuidesManager {
@@ -21,10 +22,18 @@ export class SmartGuidesManager {
 		snapY: number;
 		guides: GuideLine[];
 	} {
-		const { elements, selectedElementIds, tolerance } = deps;
+		const { elements, selectedElementIds, tolerance, previousPosition } = deps;
 		const guides: GuideLine[] = [];
 		let snapX = targetX;
 		let snapY = targetY;
+
+		// Check if user is moving away from a snap point
+		const isMovingAway = this.isMovingAwayFromSnapPoint(
+			targetX,
+			targetY,
+			previousPosition,
+			tolerance,
+		);
 
 		// Get other elements (excluding the dragged element and other selected elements)
 		const otherElements = elements.filter(
@@ -50,14 +59,18 @@ export class SmartGuidesManager {
 			// Check horizontal alignment (Y coordinates)
 			for (const draggedPoint of draggedPoints) {
 				for (const otherPoint of otherPoints) {
-					if (Math.abs(draggedPoint.y - otherPoint.y) <= tolerance) {
-						snapY = otherPoint.y - (draggedPoint.y - targetY);
-						guides.push({
-							type: "horizontal",
-							position: otherPoint.y,
-							elementId: otherElement.id,
-							alignmentType: otherPoint.type,
-						});
+					const distance = Math.abs(draggedPoint.y - otherPoint.y);
+					if (distance <= tolerance) {
+						// Only snap if not moving away or if very close to snap point
+						if (!isMovingAway || distance <= tolerance * 0.5) {
+							snapY = otherPoint.y - (draggedPoint.y - targetY);
+							guides.push({
+								type: "horizontal",
+								position: otherPoint.y,
+								elementId: otherElement.id,
+								alignmentType: otherPoint.type,
+							});
+						}
 					}
 				}
 			}
@@ -65,20 +78,52 @@ export class SmartGuidesManager {
 			// Check vertical alignment (X coordinates)
 			for (const draggedPoint of draggedPoints) {
 				for (const otherPoint of otherPoints) {
-					if (Math.abs(draggedPoint.x - otherPoint.x) <= tolerance) {
-						snapX = otherPoint.x - (draggedPoint.x - targetX);
-						guides.push({
-							type: "vertical",
-							position: otherPoint.x,
-							elementId: otherElement.id,
-							alignmentType: otherPoint.type,
-						});
+					const distance = Math.abs(draggedPoint.x - otherPoint.x);
+					if (distance <= tolerance) {
+						// Only snap if not moving away or if very close to snap point
+						if (!isMovingAway || distance <= tolerance * 0.5) {
+							snapX = otherPoint.x - (draggedPoint.x - targetX);
+							guides.push({
+								type: "vertical",
+								position: otherPoint.x,
+								elementId: otherElement.id,
+								alignmentType: otherPoint.type,
+							});
+						}
 					}
 				}
 			}
 		}
 
 		return { snapX, snapY, guides };
+	}
+
+	/**
+	 * Check if the user is moving away from a snap point
+	 */
+	private isMovingAwayFromSnapPoint(
+		currentX: number,
+		currentY: number,
+		previousPosition: { x: number; y: number } | undefined,
+		tolerance: number,
+	): boolean {
+		if (!previousPosition) {
+			return false;
+		}
+
+		const deltaX = currentX - previousPosition.x;
+		const deltaY = currentY - previousPosition.y;
+		const movementDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+		// If movement is very small, don't consider it as "moving away"
+		if (movementDistance < 1) {
+			return false;
+		}
+
+		// Check if we're moving away from the previous position
+		// This is a simple heuristic - if we've moved more than half the tolerance
+		// away from the previous position, consider it as moving away
+		return movementDistance > tolerance * 0.3;
 	}
 
 	/**
