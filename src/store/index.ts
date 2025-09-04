@@ -38,5 +38,8 @@ export * from "./viewport-hooks";
 // Islands
 export * from "./island-atoms";
 export * from "./island-hooks";
+// Smart Guides
+export * from "./smart-guides-atoms";
+export * from "./smart-guides-hooks";
 
 // Old files kept for reference but not exported to avoid conflicts

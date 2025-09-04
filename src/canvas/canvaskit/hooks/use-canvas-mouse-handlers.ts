@@ -29,6 +29,8 @@ import {
 	useDraggingPathPoint,
 	useDraggingCurveHandle,
 } from "../../../store";
+import { useSmartGuides } from "../../../store/smart-guides-hooks";
+import { SmartGuidesManager } from "../managers/smart-guides-manager";
 import { getElementAtPoint, getResizeHandle } from "../../utils";
 import { useCoordinateTransforms } from "./use-coordinate-transforms";
 import { ResizeManager } from "../managers/resize-manager";
@@ -74,6 +76,10 @@ export const useCanvasMouseHandlers = ({
 	const [draggingPathPoint, setDraggingPathPoint] = useDraggingPathPoint();
 	const [draggingCurveHandle, setDraggingCurveHandle] =
 		useDraggingCurveHandle();
+
+	// Smart guides
+	const smartGuides = useSmartGuides();
+	const smartGuidesManager = new SmartGuidesManager();
 
 	// Helpers for Path tool
 	const distance = (a: { x: number; y: number }, b: { x: number; y: number }) =>
@@ -672,6 +678,44 @@ export const useCanvasMouseHandlers = ({
 				}
 			}
 
+			// Apply smart guides if enabled and we have a single selected element
+			let finalDeltaX = deltaX;
+			let finalDeltaY = deltaY;
+
+			if (smartGuides.enabled && selection.length === 1) {
+				const draggedElement = elementsById.get(selection[0]!);
+				if (draggedElement) {
+					const targetX = draggedElement.x + deltaX;
+					const targetY = draggedElement.y + deltaY;
+
+					const snapResult = smartGuidesManager.findSnapPoints(
+						draggedElement,
+						targetX,
+						targetY,
+						{
+							elements,
+							selectedElementIds: selection,
+							tolerance: smartGuides.tolerance,
+						},
+					);
+
+					// Update guides and snap offset
+					smartGuides.setGuides(snapResult.guides);
+					smartGuides.setSnapOffset({
+						x: snapResult.snapX - targetX,
+						y: snapResult.snapY - targetY,
+					});
+					smartGuides.setIsSnapping(snapResult.guides.length > 0);
+
+					// Use snapped coordinates
+					finalDeltaX = snapResult.snapX - draggedElement.x;
+					finalDeltaY = snapResult.snapY - draggedElement.y;
+				}
+			} else {
+				// Clear guides when not dragging or multiple elements selected
+				smartGuides.clearGuides();
+			}
+
 			// Move all collected elements
 			const affectedGroupIds = new Set<string>();
 			for (const elementId of elementsToMove) {
@@ -686,18 +730,18 @@ export const useCanvasMouseHandlers = ({
 						updateElement({
 							id: elementId,
 							patch: {
-								x: element.x + deltaX,
-								y: element.y + deltaY,
-								x2: element.x2 + deltaX,
-								y2: element.y2 + deltaY,
+								x: element.x + finalDeltaX,
+								y: element.y + finalDeltaY,
+								x2: element.x2 + finalDeltaX,
+								y2: element.y2 + finalDeltaY,
 							},
 						});
 					} else {
 						// Regular element dragging
 						updateElementPosition({
 							id: elementId,
-							x: element.x + deltaX,
-							y: element.y + deltaY,
+							x: element.x + finalDeltaX,
+							y: element.y + finalDeltaY,
 						});
 					}
 					// Track groups that contain moved elements so we can update their bounds
@@ -739,6 +783,11 @@ export const useCanvasMouseHandlers = ({
 		// Commit transaction for drag/resize operations
 		if (isDragging || isResizing) {
 			commitTransaction();
+		}
+
+		// Clear smart guides when dragging ends
+		if (isDragging) {
+			smartGuides.clearGuides();
 		}
 
 		setIsDragging(false);

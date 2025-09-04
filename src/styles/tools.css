@@ -131,6 +131,46 @@
 	height: 16px;
 }
 
+.floating-tools .smart-guides-section {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-left: 0;
+}
+
+.floating-tools .smart-guides-section .tool-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: none;
+	border-radius: 8px;
+	background: transparent;
+	color: var(--text-primary);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	backdrop-filter: blur(10px);
+}
+
+.floating-tools .smart-guides-section .tool-button:hover {
+	background: var(--bg-tertiary);
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+}
+
+.floating-tools .smart-guides-section .tool-button.active {
+	background: var(--bg-tertiary);
+	border-color: var(--bg-tertiary);
+	transform: translateY(-1px);
+	color: var(--accent);
+}
+
+.floating-tools .smart-guides-section .tool-button svg {
+	width: 16px;
+	height: 16px;
+}
+
 /* Mobile responsive tools */
 @media (max-width: 768px) {
 	/* Mobile responsive positioning is handled in canvas.css */
@@ -185,6 +225,21 @@
 	}
 
 	.floating-tools .renderer-button svg {
+		width: 14px;
+		height: 14px;
+	}
+
+	.floating-tools .smart-guides-section {
+		margin-left: 8px;
+		gap: 4px;
+	}
+
+	.floating-tools .smart-guides-section .tool-button {
+		width: 28px;
+		height: 28px;
+	}
+
+	.floating-tools .smart-guides-section .tool-button svg {
 		width: 14px;
 		height: 14px;
 	}
