@@ -5,6 +5,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ToastProvider } from "./components/ToastProvider";
 import { ConfirmProvider } from "./components/ConfirmProvider";
 import "./styles/index.css";
+import "./i18n";
 import { initSentry } from "./utils/sentry";
 
 // Initialize Sentry

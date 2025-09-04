@@ -1,5 +1,4 @@
 import { Provider } from "jotai";
-import "./i18n";
 import { Canvas } from "@canvas/canvas";
 import { FilePanel } from "@panels/file";
 import { IslandSwitcher } from "@components/island-switcher";
