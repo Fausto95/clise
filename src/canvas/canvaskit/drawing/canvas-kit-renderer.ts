@@ -11,6 +11,7 @@ import { PerformanceManager } from "../../performance/performance-manager";
 import { ImageCacheManager } from "../rendering/image-cache-manager";
 import { SelectionRenderer } from "../rendering/interaction-renderers/selection-renderer";
 import { BoxSelectionRenderer } from "../rendering/interaction-renderers/box-selection-renderer";
+import { SmartGuidesRenderer } from "../rendering/interaction-renderers/smart-guides-renderer";
 import { RectangleRenderer } from "../rendering/element-renderers/rectangle-renderer";
 import { LineRenderer } from "../rendering/element-renderers/line-renderer";
 import { TextRenderer } from "../rendering/element-renderers/text-renderer";
@@ -42,6 +43,7 @@ export class CanvasKitRenderer {
 	private imageCacheManager: ImageCacheManager; // Extracted image cache management
 	private selectionRenderer: SelectionRenderer; // Extracted selection rendering
 	private boxSelectionRenderer: BoxSelectionRenderer; // Extracted box selection rendering
+	private smartGuidesRenderer: SmartGuidesRenderer; // Extracted smart guides rendering
 	private rectangleRenderer: RectangleRenderer; // Extracted rectangle rendering
 	private lineRenderer: LineRenderer; // Extracted line rendering
 	private textRenderer: TextRenderer; // Extracted text rendering
@@ -68,6 +70,7 @@ export class CanvasKitRenderer {
 		this.pathCache = new PathCache(canvasKit);
 		this.selectionRenderer = new SelectionRenderer(canvasKit);
 		this.boxSelectionRenderer = new BoxSelectionRenderer(canvasKit);
+		this.smartGuidesRenderer = new SmartGuidesRenderer(canvasKit);
 		this.rectangleRenderer = new RectangleRenderer(
 			canvasKit,
 			this.paintPool,
@@ -541,6 +544,14 @@ export class CanvasKitRenderer {
 			end: { x: number; y: number };
 		},
 		groups: Group[] = [],
+		smartGuides?: {
+			guides: Array<{
+				type: "horizontal" | "vertical";
+				position: number;
+				elementId: string;
+				alignmentType: "edge" | "center";
+			}>;
+		},
 	) {
 		if (!surface) return;
 
@@ -591,6 +602,21 @@ export class CanvasKitRenderer {
 				canvasContext,
 				boxSelection.start,
 				boxSelection.end,
+			);
+		}
+
+		// Draw smart guides AFTER transformations in world coordinates
+		if (smartGuides && smartGuides.guides.length > 0) {
+			this.smartGuidesRenderer.drawSmartGuidesWithBounds(
+				canvasContext,
+				smartGuides.guides,
+				{
+					left: -pan.x / zoom - dimensions.width / 2 / zoom,
+					right: -pan.x / zoom + dimensions.width / 2 / zoom,
+					top: -pan.y / zoom - dimensions.height / 2 / zoom,
+					bottom: -pan.y / zoom + dimensions.height / 2 / zoom,
+				},
+				zoom,
 			);
 		}
 
@@ -765,5 +791,6 @@ export class CanvasKitRenderer {
 		this.blurFilterCache.clearCache();
 		this.pathCache.clearCache();
 		this.colorCache.clearCache();
+		this.smartGuidesRenderer.dispose();
 	}
 }

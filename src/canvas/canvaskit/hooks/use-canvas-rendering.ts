@@ -10,6 +10,7 @@ import {
 	useSelection,
 	selectionRecalcVersionAtom,
 } from "../../../store";
+import { useActiveGuides } from "../../../store/smart-guides-hooks";
 import { useAtomValue } from "jotai";
 import { captureError } from "../../../utils/sentry";
 import { fontManager } from "../../../utils/font-manager";
@@ -34,6 +35,7 @@ export const useCanvasRendering = ({
 	const [boxSelectEnd] = useBoxSelectEnd();
 	const groups = useGroups();
 	const selectionRecalcVersion = useAtomValue(selectionRecalcVersionAtom);
+	const [activeGuides] = useActiveGuides();
 	const [themeVersion, setThemeVersion] = useState(0);
 	const [fontVersion, setFontVersion] = useState(0);
 
@@ -68,6 +70,9 @@ export const useCanvasRendering = ({
 					? { start: boxSelectStart, end: boxSelectEnd }
 					: undefined;
 
+			const smartGuides =
+				activeGuides.length > 0 ? { guides: activeGuides } : undefined;
+
 			rendererRef!.render(
 				surface,
 				pan,
@@ -78,6 +83,7 @@ export const useCanvasRendering = ({
 				dpr,
 				boxSelection,
 				groups,
+				smartGuides,
 			);
 		};
 
@@ -103,6 +109,7 @@ export const useCanvasRendering = ({
 		boxSelectStart,
 		boxSelectEnd,
 		groups,
+		activeGuides,
 		selectionRecalcVersion,
 		themeVersion,
 		fontVersion,
