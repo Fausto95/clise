@@ -22,10 +22,25 @@ type Bounds = { left: number; top: number; right: number; bottom: number };
 export class IslandPreviewGenerator {
 	private canvas: HTMLCanvasElement;
 	private ctx: CanvasRenderingContext2D;
+	private isDestroyed = false;
 
 	constructor() {
 		this.canvas = document.createElement("canvas");
 		this.ctx = this.canvas.getContext("2d")!;
+	}
+
+	/**
+	 * Clean up resources to prevent memory leaks
+	 */
+	destroy() {
+		if (this.isDestroyed) return;
+
+		this.isDestroyed = true;
+		this.canvas.width = 0;
+		this.canvas.height = 0;
+		// Clear the canvas element reference to help GC
+		(this.canvas as any) = null;
+		(this.ctx as any) = null;
 	}
 
 	/**
@@ -35,9 +50,17 @@ export class IslandPreviewGenerator {
 		island: Island,
 		options: PreviewOptions = { width: 200, height: 150 },
 	): string {
+		if (this.isDestroyed) {
+			return this.generatePlaceholderSVG(island, options);
+		}
+
 		try {
+			if (!island || !island.elements || !Array.isArray(island.elements)) {
+				return this.generatePlaceholderSVG(island, options);
+			}
+
 			const elements = island.elements as Element[];
-			const visible = elements.filter((e) => e.visible !== false);
+			const visible = elements.filter((e) => e && e.visible !== false);
 
 			if (visible.length === 0) {
 				return this.generatePlaceholderSVG(island, options);
@@ -155,6 +178,10 @@ export class IslandPreviewGenerator {
 		island: Island,
 		options: PreviewOptions = { width: 200, height: 150 },
 	): Promise<string | null> {
+		if (this.isDestroyed) {
+			return null;
+		}
+
 		try {
 			// Set canvas dimensions
 			this.canvas.width = options.width;
@@ -377,6 +404,10 @@ export class IslandPreviewGenerator {
 		island: Island,
 		options: PreviewOptions = { width: 200, height: 150 },
 	): string {
+		if (this.isDestroyed) {
+			return this.generatePlaceholderSVG(island, options);
+		}
+
 		this.canvas.width = options.width;
 		this.canvas.height = options.height;
 

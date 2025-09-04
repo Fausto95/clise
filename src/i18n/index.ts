@@ -9,33 +9,33 @@ import ptLocale from "./locales/pt.json";
 
 // Initialize i18n with all locales
 i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    fallbackLng: "en",
-    debug: false,
-    partialBundledLanguages: true,
+	.use(LanguageDetector)
+	.use(initReactI18next)
+	.init({
+		fallbackLng: "en",
+		debug: false,
+		partialBundledLanguages: true,
 
-    interpolation: {
-      escapeValue: false, // React already escapes values
-    },
+		interpolation: {
+			escapeValue: false, // React already escapes values
+		},
 
-    detection: {
-      order: ["localStorage", "navigator", "htmlTag"],
-      caches: ["localStorage"],
-    },
+		detection: {
+			order: ["localStorage", "navigator", "htmlTag"],
+			caches: ["localStorage"],
+		},
 
-    resources: {
-      en: {
-        translation: enLocale,
-      },
-      fr: {
-        translation: frLocale,
-      },
-      pt: {
-        translation: ptLocale,
-      },
-    },
-  });
+		resources: {
+			en: {
+				translation: enLocale,
+			},
+			fr: {
+				translation: frLocale,
+			},
+			pt: {
+				translation: ptLocale,
+			},
+		},
+	});
 
 export default i18n;

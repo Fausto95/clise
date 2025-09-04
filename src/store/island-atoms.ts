@@ -51,29 +51,32 @@ export const currentIslandIndexAtom = atom((get) => {
 // Island switcher navigation
 export const nextIslandAtom = atom(null, (get, set) => {
 	const islands = get(islandsAtom);
-	const currentIndex = get(currentIslandIndexAtom);
-
 	if (islands.length === 0) return;
 
-	const nextIndex = (currentIndex + 1) % islands.length;
+	// Get the current switcher index directly to avoid circular dependency
+	const currentSwitcherIndex = get(islandSwitcherIndexAtom);
+	const nextIndex = (currentSwitcherIndex + 1) % islands.length;
 	const nextIsland = islands[nextIndex];
+
 	if (nextIsland) {
-		set(selectedIslandIdAtom, nextIsland.id);
 		set(islandSwitcherIndexAtom, nextIndex);
+		// Don't immediately update selectedIslandIdAtom - let the user confirm first
 	}
 });
 
 export const previousIslandAtom = atom(null, (get, set) => {
 	const islands = get(islandsAtom);
-	const currentIndex = get(currentIslandIndexAtom);
-
 	if (islands.length === 0) return;
 
-	const prevIndex = currentIndex <= 0 ? islands.length - 1 : currentIndex - 1;
+	// Get the current switcher index directly to avoid circular dependency
+	const currentSwitcherIndex = get(islandSwitcherIndexAtom);
+	const prevIndex =
+		currentSwitcherIndex <= 0 ? islands.length - 1 : currentSwitcherIndex - 1;
 	const prevIsland = islands[prevIndex];
+
 	if (prevIsland) {
-		set(selectedIslandIdAtom, prevIsland.id);
 		set(islandSwitcherIndexAtom, prevIndex);
+		// Don't immediately update selectedIslandIdAtom - let the user confirm first
 	}
 });
 
@@ -108,11 +111,14 @@ export const openIslandSwitcherAtom = atom(null, (get, set) => {
 	// Set initial selection to current island or first island (only if islands exist)
 	if (islands.length > 0) {
 		const currentIsland = get(selectedIslandIdAtom);
-		const initialIndex = currentIsland
-			? islands.findIndex((i) => i.id === currentIsland)
-			: 0;
+		let initialIndex = 0;
 
-		set(islandSwitcherIndexAtom, Math.max(0, initialIndex));
+		if (currentIsland) {
+			const foundIndex = islands.findIndex((i) => i.id === currentIsland);
+			initialIndex = foundIndex >= 0 ? foundIndex : 0;
+		}
+
+		set(islandSwitcherIndexAtom, initialIndex);
 	} else {
 		// Set to 0 for empty state
 		set(islandSwitcherIndexAtom, 0);

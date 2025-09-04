@@ -33,8 +33,70 @@ export class IslandDetector {
 		maxConnectionDistance: 250,
 	};
 
+	// Spatial grid for fast neighbor lookup
+	private spatialGrid: Map<string, BaseElement[]> = new Map();
+	private gridSize: number = 300; // Grid cell size based on max connection distance
+
 	/**
-	 * Detect islands (spatial clusters) of elements on the canvas using a graph-based connected components algorithm.
+	 * Build spatial grid index for fast neighbor lookup
+	 */
+	private buildSpatialGrid(elements: BaseElement[]): void {
+		this.spatialGrid.clear();
+
+		for (const element of elements) {
+			// Add element to all grid cells it touches
+			const leftGrid = Math.floor(element.x / this.gridSize);
+			const rightGrid = Math.floor((element.x + element.w) / this.gridSize);
+			const topGrid = Math.floor(element.y / this.gridSize);
+			const bottomGrid = Math.floor((element.y + element.h) / this.gridSize);
+
+			for (let gx = leftGrid; gx <= rightGrid; gx++) {
+				for (let gy = topGrid; gy <= bottomGrid; gy++) {
+					const key = `${gx},${gy}`;
+					if (!this.spatialGrid.has(key)) {
+						this.spatialGrid.set(key, []);
+					}
+					this.spatialGrid.get(key)!.push(element);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get potential neighbors for an element using spatial grid
+	 */
+	private getPotentialNeighbors(
+		element: BaseElement,
+		maxDistance: number,
+	): BaseElement[] {
+		const neighbors = new Set<BaseElement>();
+
+		// Calculate which grid cells to check
+		const buffer = Math.ceil(maxDistance / this.gridSize);
+		const centerX = element.x + element.w / 2;
+		const centerY = element.y + element.h / 2;
+		const centerGridX = Math.floor(centerX / this.gridSize);
+		const centerGridY = Math.floor(centerY / this.gridSize);
+
+		for (let gx = centerGridX - buffer; gx <= centerGridX + buffer; gx++) {
+			for (let gy = centerGridY - buffer; gy <= centerGridY + buffer; gy++) {
+				const key = `${gx},${gy}`;
+				const cellElements = this.spatialGrid.get(key);
+				if (cellElements) {
+					cellElements.forEach((el) => {
+						if (el.id !== element.id) {
+							neighbors.add(el);
+						}
+					});
+				}
+			}
+		}
+
+		return Array.from(neighbors);
+	}
+
+	/**
+	 * Detect islands (spatial clusters) of elements on the canvas using optimized spatial indexing.
 	 */
 	detectIslands(
 		elements: BaseElement[],
@@ -50,44 +112,55 @@ export class IslandDetector {
 		);
 		if (validElements.length < opts.minElements) return [];
 
-		// Build adjacency list based on bounding box intersection or proximity
+		// Build spatial grid for O(n) neighbor lookups instead of O(n²)
+		this.gridSize = Math.max(300, opts.maxConnectionDistance * 1.2);
+		this.buildSpatialGrid(validElements);
+
+		// Build adjacency list using spatial grid optimization
 		const adjacency: Record<string, Set<string>> = {};
-		for (let i = 0; i < validElements.length; i++) {
-			const a = validElements[i];
-			if (!a) continue;
-			if (!adjacency[a.id]) adjacency[a.id] = new Set();
-			for (let j = i + 1; j < validElements.length; j++) {
-				const b = validElements[j];
-				if (!b) continue;
-				if (this.elementsAreConnected(a, b, opts)) {
-					adjacency[a.id]?.add(b.id);
-					if (!adjacency[b.id]) adjacency[b.id] = new Set();
-					adjacency[b.id]?.add(a.id);
+
+		for (const element of validElements) {
+			if (!adjacency[element.id]) adjacency[element.id] = new Set();
+
+			// Only check potential neighbors from spatial grid
+			const potentialNeighbors = this.getPotentialNeighbors(
+				element,
+				opts.maxConnectionDistance,
+			);
+
+			for (const neighbor of potentialNeighbors) {
+				if (this.elementsAreConnected(element, neighbor, opts)) {
+					adjacency[element.id]?.add(neighbor.id);
+					if (!adjacency[neighbor.id]) adjacency[neighbor.id] = new Set();
+					adjacency[neighbor.id]?.add(element.id);
 				}
 			}
 		}
 
-		// Find connected components (islands)
-		const visited = new Set<string>();
-		const islands: Island[] = [];
-		const idToElement = Object.fromEntries(validElements.map((e) => [e.id, e]));
+		// Find connected components using Union-Find for better performance
+		const unionFind = new UnionFind(validElements.map((e) => e.id));
 
-		for (const el of validElements) {
-			if (visited.has(el.id)) continue;
-			const cluster: BaseElement[] = [];
-			const queue = [el.id];
-			visited.add(el.id);
-			while (queue.length > 0) {
-				const currId = queue.shift()!;
-				const currEl = idToElement[currId];
-				if (currEl) cluster.push(currEl);
-				for (const neighbor of adjacency[currId] || []) {
-					if (!visited.has(neighbor)) {
-						visited.add(neighbor);
-						queue.push(neighbor);
-					}
-				}
+		// Union connected elements
+		for (const element of validElements) {
+			for (const neighborId of adjacency[element.id] || []) {
+				unionFind.union(element.id, neighborId);
 			}
+		}
+
+		// Group elements by their root component
+		const components = new Map<string, BaseElement[]>();
+
+		for (const element of validElements) {
+			const root = unionFind.find(element.id);
+			if (!components.has(root)) {
+				components.set(root, []);
+			}
+			components.get(root)!.push(element);
+		}
+
+		// Create islands from components
+		const islands: Island[] = [];
+		for (const [, cluster] of components) {
 			if (cluster.length >= opts.minElements) {
 				islands.push(this.createIsland(cluster, `island-${islands.length}`));
 			}
@@ -242,5 +315,51 @@ export class IslandDetector {
 		const dx = point.x - island.center.x;
 		const dy = point.y - island.center.y;
 		return Math.sqrt(dx * dx + dy * dy);
+	}
+}
+
+/**
+ * Union-Find (Disjoint Set) data structure for efficient connected components
+ */
+class UnionFind {
+	private parent: Map<string, string> = new Map();
+	private rank: Map<string, number> = new Map();
+
+	constructor(elements: string[]) {
+		for (const element of elements) {
+			this.parent.set(element, element);
+			this.rank.set(element, 0);
+		}
+	}
+
+	find(x: string): string {
+		const parent = this.parent.get(x);
+		if (parent !== x) {
+			// Path compression
+			const root = this.find(parent!);
+			this.parent.set(x, root);
+			return root;
+		}
+		return x;
+	}
+
+	union(x: string, y: string): void {
+		const rootX = this.find(x);
+		const rootY = this.find(y);
+
+		if (rootX === rootY) return;
+
+		const rankX = this.rank.get(rootX) || 0;
+		const rankY = this.rank.get(rootY) || 0;
+
+		// Union by rank
+		if (rankX < rankY) {
+			this.parent.set(rootX, rootY);
+		} else if (rankX > rankY) {
+			this.parent.set(rootY, rootX);
+		} else {
+			this.parent.set(rootY, rootX);
+			this.rank.set(rootX, rankX + 1);
+		}
 	}
 }
