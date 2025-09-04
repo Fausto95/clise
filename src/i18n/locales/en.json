@@ -199,12 +199,12 @@
 		"description": "We're working hard to bring Clise to mobile devices. Currently, Clise is optimized for desktop use with mouse and keyboard.",
 		"features": {
 			"title": "Coming Soon:",
-			"items": [
-				"Mobile-optimized interface",
-				"Touch gestures for drawing",
-				"Multi-touch zoom and pan",
-				"Touch-friendly tools"
-			]
+			"items": {
+				"interface": "Mobile-optimized interface",
+				"gestures": "Touch gestures for drawing",
+				"zoom": "Multi-touch zoom and pan",
+				"tools": "Touch-friendly tools"
+			}
 		},
 		"note": "Please visit us on a desktop or laptop for the full experience."
 	},

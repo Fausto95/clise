@@ -185,12 +185,12 @@
 		"description": "Nous travaillons dur pour apporter Clise aux appareils mobiles. Actuellement, Clise est optimisé pour une utilisation sur ordinateur avec souris et clavier.",
 		"features": {
 			"title": "Bientôt disponible :",
-			"items": [
-				"Interface optimisée mobile",
-				"Gestes tactiles pour dessiner",
-				"Zoom et panoramique multi-touch",
-				"Outils adaptés au tactile"
-			]
+			"items": {
+				"interface": "Interface optimisée mobile",
+				"gestures": "Gestes tactiles pour dessiner",
+				"zoom": "Zoom et panoramique multi-touch",
+				"tools": "Outils adaptés au tactile"
+			}
 		},
 		"note": "Veuillez nous rendre visite sur un ordinateur de bureau ou portable pour une expérience complète."
 	},
