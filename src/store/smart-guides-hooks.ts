@@ -5,6 +5,7 @@ import {
 	activeGuidesAtom,
 	snapOffsetAtom,
 	isSnappingAtom,
+	previousPositionAtom,
 	type GuideLine,
 } from "./smart-guides-atoms";
 
@@ -13,6 +14,7 @@ export const useSnapTolerance = () => useAtom(snapToleranceAtom);
 export const useActiveGuides = () => useAtom(activeGuidesAtom);
 export const useSnapOffset = () => useAtom(snapOffsetAtom);
 export const useIsSnapping = () => useAtom(isSnappingAtom);
+export const usePreviousPosition = () => useAtom(previousPositionAtom);
 
 // Composite hook for smart guides functionality
 export const useSmartGuides = () => {
@@ -21,11 +23,13 @@ export const useSmartGuides = () => {
 	const [activeGuides, setActiveGuides] = useActiveGuides();
 	const [snapOffset, setSnapOffset] = useSnapOffset();
 	const [isSnapping, setIsSnapping] = useIsSnapping();
+	const [previousPosition, setPreviousPosition] = usePreviousPosition();
 
 	const clearGuides = () => {
 		setActiveGuides([]);
 		setSnapOffset({ x: 0, y: 0 });
 		setIsSnapping(false);
+		setPreviousPosition(null);
 	};
 
 	const addGuide = (guide: GuideLine) => {
@@ -47,6 +51,8 @@ export const useSmartGuides = () => {
 		setSnapOffset,
 		isSnapping,
 		setIsSnapping,
+		previousPosition,
+		setPreviousPosition,
 		clearGuides,
 		addGuide,
 		setGuides,

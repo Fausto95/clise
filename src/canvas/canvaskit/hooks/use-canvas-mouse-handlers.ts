@@ -696,6 +696,7 @@ export const useCanvasMouseHandlers = ({
 							elements,
 							selectedElementIds: selection,
 							tolerance: smartGuides.tolerance,
+							previousPosition: smartGuides.previousPosition || undefined,
 						},
 					);
 
@@ -707,9 +708,12 @@ export const useCanvasMouseHandlers = ({
 					});
 					smartGuides.setIsSnapping(snapResult.guides.length > 0);
 
-					// Use snapped coordinates
+					// Use snapped coordinates - simple like the demo
 					finalDeltaX = snapResult.snapX - draggedElement.x;
 					finalDeltaY = snapResult.snapY - draggedElement.y;
+
+					// Update previous position for next frame
+					smartGuides.setPreviousPosition({ x: targetX, y: targetY });
 				}
 			} else {
 				// Clear guides when not dragging or multiple elements selected

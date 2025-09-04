@@ -2,7 +2,7 @@ import { atom } from "jotai";
 
 // Smart guides state atoms
 export const smartGuidesEnabledAtom = atom<boolean>(true);
-export const snapToleranceAtom = atom<number>(10); // Pixels within which snapping occurs
+export const snapToleranceAtom = atom<number>(2); // Pixels within which snapping occurs
 
 // Guide line data
 export interface GuideLine {
@@ -19,3 +19,6 @@ export const snapOffsetAtom = atom<{ x: number; y: number }>({ x: 0, y: 0 });
 
 // Whether we're currently snapping to guides
 export const isSnappingAtom = atom<boolean>(false);
+
+// Previous position for snap escape detection
+export const previousPositionAtom = atom<{ x: number; y: number } | null>(null);
