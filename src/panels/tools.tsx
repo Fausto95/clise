@@ -5,7 +5,6 @@ import {
 	useTool,
 	useZoom,
 	useZoomControls,
-	useSmartGuidesEnabled,
 } from "@store/index";
 import { usePan, useViewport } from "@store/viewport-hooks";
 import {
@@ -18,7 +17,6 @@ import {
 	Type,
 	ZoomIn,
 	ZoomOut,
-	Ruler,
 } from "lucide-react";
 import { captureError } from "../utils/sentry";
 
@@ -70,7 +68,6 @@ export function BottomToolbar({ className }: { className?: string }) {
 	const [, setSelection] = useSelection();
 	const { pan } = usePan();
 	const { viewport } = useViewport();
-	const [smartGuidesEnabled, setSmartGuidesEnabled] = useSmartGuidesEnabled();
 
 	const handleToolClick = async (t: Tool) => {
 		if (t === "image") {
@@ -146,18 +143,6 @@ export function BottomToolbar({ className }: { className?: string }) {
 				</span>
 				<button className="zoom-button" onClick={zoomIn} title={t("zoom.in")}>
 					<ZoomIn size={16} />
-				</button>
-			</div>
-
-			<div className="smart-guides-section">
-				<button
-					className={`tool-button ${smartGuidesEnabled ? "active" : ""}`}
-					onClick={() => setSmartGuidesEnabled(!smartGuidesEnabled)}
-					title={
-						smartGuidesEnabled ? "Disable Smart Guides" : "Enable Smart Guides"
-					}
-				>
-					<Ruler size={18} />
 				</button>
 			</div>
 		</div>

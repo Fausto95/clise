@@ -5,6 +5,7 @@ import {
 	Menu,
 	Plus,
 	Save,
+	Ruler,
 } from "lucide-react";
 import { useToast } from "../components/ToastProvider";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { useFileOperations } from "../store/file-hooks";
+import { useSmartGuidesEnabled } from "../store/smart-guides-hooks";
 
 export function FilePanel() {
 	const { t } = useTranslation();
@@ -22,6 +24,7 @@ export function FilePanel() {
 	const { exportAll, importFile, newDocument } = useFileOperations();
 	const toast = useToast();
 	const confirmModal = useConfirm();
+	const [smartGuidesEnabled, setSmartGuidesEnabled] = useSmartGuidesEnabled();
 
 	// Close dropdown when clicking outside
 	useEffect(() => {
@@ -111,6 +114,21 @@ export function FilePanel() {
 						<button className="dropdown-item" onClick={handleExport}>
 							<Download size={16} />
 							<span>{t("file.export", "Export")}</span>
+						</button>
+						<div className="dropdown-separator" />
+						<button
+							className="dropdown-item"
+							onClick={() => {
+								setSmartGuidesEnabled(!smartGuidesEnabled);
+								setIsOpen(false);
+							}}
+						>
+							<Ruler size={16} />
+							<span>
+								{smartGuidesEnabled
+									? t("file.disableSmartGuides", "Disable Smart Guides")
+									: t("file.enableSmartGuides", "Enable Smart Guides")}
+							</span>
 						</button>
 						<div className="dropdown-separator" />
 						<div className="dropdown-item language-switcher-item">
