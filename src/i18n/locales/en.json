@@ -1,230 +1,230 @@
 {
-  "app": {
-    "title": "Clise",
-    "subtitle": "Your design canvas awaits ✨",
-    "untitled": "Untitled"
-  },
-  "tools": {
-    "select": "Select",
-    "rect": "Rectangle",
-    "ellipse": "Ellipse",
-    "line": "Line",
-    "text": "Text",
-    "frame": "Frame",
-    "image": "Image"
-  },
-  "panels": {
-    "layers": {
-      "title": "Layers",
-      "empty": {
-        "title": "No layers yet",
-        "subtitle": "Start creating to see layers here"
-      }
-    }
-  },
-  "contextMenu": {
-    "copy": "Copy",
-    "duplicate": "Duplicate",
-    "paste": "Paste",
-    "delete": "Delete",
-    "undo": "Undo",
-    "redo": "Redo",
-    "exportSelection": "Export Selection",
-    "exportSelectionToPng": "Export selection to PNG",
-    "exportSelectionToSvg": "Export selection to SVG",
-    "hide": "Hide",
-    "show": "Show",
-    "element": "Element",
-    "elements": "Elements",
-    "group": "Group",
-    "ungroup": "Ungroup",
-    "bringToFront": "Bring to Front",
-    "bringForward": "Bring Forward",
-    "sendBackward": "Send Backward",
-    "sendToBack": "Send to Back",
-    "selectAll": "Use ⌘A to select all elements",
-    "goToElement": "Go to element"
-  },
-  "zoom": {
-    "in": "Zoom In",
-    "out": "Zoom Out",
-    "reset": "Double-click to reset to 100%"
-  },
-  "elements": {
-    "text": "TEXT",
-    "rect": "RECT",
-    "ellipse": "ELLIPSE",
-    "frame": "FRAME",
-    "line": "Line",
-    "image": "Image",
-    "decorativeCircle": "Decorative Circle",
-    "decorativeRect": "Decorative Rect",
-    "decorativeDot": "Decorative Dot"
-  },
-  "file": {
-    "export": "Export",
-    "import": "Import",
-    "new": "New",
-    "save": "Save",
-    "load": "Load",
-    "clearSavedData": "Clear Saved Data",
-    "clearStorageConfirm": "Clear saved data in storage? This will remove persisted elements and settings.",
-    "clearStorageDone": "Saved data cleared.",
-    "confirmNew": "Create a new document? This will clear all current elements.",
-    "openError": "Failed to open file. Please check the file format.",
-    "exportError": "Failed to export file.",
-    "importError": "Failed to import file. Please check that it's a valid .clise file."
-  },
-  "shortcuts": {
-    "copy": "⌘C",
-    "duplicate": "⌘D",
-    "paste": "⌘V",
-    "delete": "⌫",
-    "undo": "⌘Z",
-    "redo": "⌘⇧Z",
-    "group": "⌘G",
-    "ungroup": "⌘⇧G",
-    "bringToFront": "⌘⇧]",
-    "bringForward": "⌘]",
-    "sendBackward": "⌘[",
-    "sendToBack": "⌘⇧["
-  },
-  "inspector": {
-    "title": "Inspector",
-    "frameOptions": "Frame Options",
-    "clipContent": "Clip Content",
-    "position": "Position",
-    "size": "Size",
-    "lockDimensions": "Lock dimensions",
-    "unlockDimensions": "Unlock dimensions",
-    "appearance": "Appearance",
-    "typography": "Typography",
-    "cornerRadius": "Corner Radius",
-    "effects": "Effects",
-    "layout": "Layout",
-    "childLayout": "Child Layout",
-    "spacing": "Spacing",
-    "padding": "Padding",
-    "gap": "Gap",
-    "direction": "Direction",
-    "row": "Row",
-    "column": "Column",
-    "color": "Color",
-    "fill": "Fill",
-    "stroke": "Stroke",
-    "fontSize": "Font Size",
-    "fontFamily": "Font Family",
-    "opacity": "Opacity",
-    "blur": "Blur",
-    "blurType": "Blur Type",
-    "blurRadius": "Blur Radius",
-    "layerBlur": "Layer Blur",
-    "backgroundBlur": "Background Blur",
-    "horizontalAlign": "Horizontal Align",
-    "verticalAlign": "Vertical Align",
-    "left": "Left",
-    "center": "Center",
-    "right": "Right",
-    "top": "Top",
-    "bottom": "Bottom",
-    "none": "None",
-    "paddingTop": "Top",
-    "paddingRight": "Right",
-    "paddingBottom": "Bottom",
-    "paddingLeft": "Left",
-    "topLeft": "Top Left",
-    "topRight": "Top Right",
-    "bottomLeft": "Bottom Left",
-    "bottomRight": "Bottom Right",
-    "svgColors": "SVG Colors",
-    "changeAll": "Change All",
-    "individualPaths": "Individual Paths",
-    "textDecoration": "Text Decoration",
-    "fontWeight": "Font Weight",
-    "textTransform": "Text Transform",
-    "lineHeight": "Line Height",
-    "letterSpacing": "Letter Spacing",
-    "gradients": "Gradients",
-    "linearGradient": "Linear",
-    "radialGradient": "Radial",
-    "meshGradient": "Mesh",
-    "gradientStops": "Gradient Stops",
-    "addGradientStop": "Add Stop",
-    "removeGradientStop": "Remove Stop",
-    "startPoint": "Start Point",
-    "endPoint": "End Point",
-    "radius": "Radius",
-    "angle": "Angle",
-    "centerX": "Center X",
-    "centerY": "Center Y",
-    "addGradient": "Add Gradient",
-    "shadow": "Shadow",
-    "xOffset": "X Offset",
-    "yOffset": "Y Offset",
-    "strokeWidth": "Stroke Width",
-    "strokeStyle": "Stroke Style",
-    "strokePosition": "Stroke Position",
-    "solid": "Solid",
-    "dashed": "Dashed",
-    "inside": "Inside",
-    "outside": "Outside",
-    "framePresets": "Frame Presets",
-    "presets": "Presets",
-    "selectPreset": "Select a preset…",
-    "phone": "Phone",
-    "tablet": "Tablet",
-    "desktop": "Desktop",
-    "presetLabels": {
-      "phone": {
-        "iphone15Pro": "iPhone 15 Pro (393×852)",
-        "iphone15ProMax": "iPhone 15 Pro Max (430×932)",
-        "iphone14": "iPhone 14 (390×844)",
-        "iphoneSE": "iPhone SE (375×667)",
-        "pixel7": "Pixel 7 (412×915)"
-      },
-      "tablet": {
-        "ipadPro11": "iPad Pro 11\" (834×1194)",
-        "ipadMini": "iPad Mini (744×1133)"
-      },
-      "desktop": {
-        "desktop": "Desktop (1440×1024)",
-        "macbookPro14": "MacBook Pro 14\" (1512×982)",
-        "macbookPro16": "MacBook Pro 16\" (1728×1117)",
-        "fullHD": "Full HD (1920×1080)"
-      }
-    }
-  },
-  "touchDevice": {
-    "title": "Mobile Support Coming Soon",
-    "description": "We're working hard to bring Clise to mobile devices. Currently, Clise is optimized for desktop use with mouse and keyboard.",
-    "features": {
-      "title": "Coming Soon:",
-      "items": [
-        "Mobile-optimized interface",
-        "Touch gestures for drawing",
-        "Multi-touch zoom and pan",
-        "Touch-friendly tools"
-      ]
-    },
-    "note": "Please visit us on a desktop or laptop for the full experience."
-  },
-  "errorBoundary": {
-    "title": "Something went wrong",
-    "message": "An unrecoverable error occurred. You can try reloading the app. A report was prepared to help us fix this.",
-    "reload": "Reload"
-  },
-  "dragDrop": {
-    "onlyOneClise": "Please drop only one .clise file at a time",
-    "mixedTypes": "Please drop either .clise files or image files, not both at the same time",
-    "invalidFiles": "Please drop valid .clise files or image files (JPG, PNG, SVG)"
-  },
-  "imageImport": {
-    "invalidFiles": "Invalid image files:\n{{list}}",
-    "failed": "Failed to import one or more image files. Please try again."
-  },
-  "confirm": {
-    "title": "Confirm",
-    "ok": "OK",
-    "cancel": "Cancel"
-  }
+	"app": {
+		"title": "Clise",
+		"subtitle": "Your design canvas awaits ✨",
+		"untitled": "Untitled"
+	},
+	"tools": {
+		"select": "Select",
+		"rect": "Rectangle",
+		"ellipse": "Ellipse",
+		"line": "Line",
+		"text": "Text",
+		"frame": "Frame",
+		"image": "Image"
+	},
+	"panels": {
+		"layers": {
+			"title": "Layers",
+			"empty": {
+				"title": "No layers yet",
+				"subtitle": "Start creating to see layers here"
+			}
+		}
+	},
+	"contextMenu": {
+		"copy": "Copy",
+		"duplicate": "Duplicate",
+		"paste": "Paste",
+		"delete": "Delete",
+		"undo": "Undo",
+		"redo": "Redo",
+		"exportSelection": "Export Selection",
+		"exportSelectionToPng": "Export selection to PNG",
+		"exportSelectionToSvg": "Export selection to SVG",
+		"hide": "Hide",
+		"show": "Show",
+		"element": "Element",
+		"elements": "Elements",
+		"group": "Group",
+		"ungroup": "Ungroup",
+		"bringToFront": "Bring to Front",
+		"bringForward": "Bring Forward",
+		"sendBackward": "Send Backward",
+		"sendToBack": "Send to Back",
+		"selectAll": "Use ⌘A to select all elements",
+		"goToElement": "Go to element"
+	},
+	"zoom": {
+		"in": "Zoom In",
+		"out": "Zoom Out",
+		"reset": "Double-click to reset to 100%"
+	},
+	"elements": {
+		"text": "TEXT",
+		"rect": "RECT",
+		"ellipse": "ELLIPSE",
+		"frame": "FRAME",
+		"line": "Line",
+		"image": "Image",
+		"decorativeCircle": "Decorative Circle",
+		"decorativeRect": "Decorative Rect",
+		"decorativeDot": "Decorative Dot"
+	},
+	"file": {
+		"export": "Export",
+		"import": "Import",
+		"new": "New",
+		"save": "Save",
+		"load": "Load",
+		"clearSavedData": "Clear Saved Data",
+		"clearStorageConfirm": "Clear saved data in storage? This will remove persisted elements and settings.",
+		"clearStorageDone": "Saved data cleared.",
+		"confirmNew": "Create a new document? This will clear all current elements.",
+		"openError": "Failed to open file. Please check the file format.",
+		"exportError": "Failed to export file.",
+		"importError": "Failed to import file. Please check that it's a valid .clise file."
+	},
+	"shortcuts": {
+		"copy": "⌘C",
+		"duplicate": "⌘D",
+		"paste": "⌘V",
+		"delete": "⌫",
+		"undo": "⌘Z",
+		"redo": "⌘⇧Z",
+		"group": "⌘G",
+		"ungroup": "⌘⇧G",
+		"bringToFront": "⌘⇧]",
+		"bringForward": "⌘]",
+		"sendBackward": "⌘[",
+		"sendToBack": "⌘⇧["
+	},
+	"inspector": {
+		"title": "Inspector",
+		"frameOptions": "Frame Options",
+		"clipContent": "Clip Content",
+		"position": "Position",
+		"size": "Size",
+		"lockDimensions": "Lock dimensions",
+		"unlockDimensions": "Unlock dimensions",
+		"appearance": "Appearance",
+		"typography": "Typography",
+		"cornerRadius": "Corner Radius",
+		"effects": "Effects",
+		"layout": "Layout",
+		"childLayout": "Child Layout",
+		"spacing": "Spacing",
+		"padding": "Padding",
+		"gap": "Gap",
+		"direction": "Direction",
+		"row": "Row",
+		"column": "Column",
+		"color": "Color",
+		"fill": "Fill",
+		"stroke": "Stroke",
+		"fontSize": "Font Size",
+		"fontFamily": "Font Family",
+		"opacity": "Opacity",
+		"blur": "Blur",
+		"blurType": "Blur Type",
+		"blurRadius": "Blur Radius",
+		"layerBlur": "Layer Blur",
+		"backgroundBlur": "Background Blur",
+		"horizontalAlign": "Horizontal Align",
+		"verticalAlign": "Vertical Align",
+		"left": "Left",
+		"center": "Center",
+		"right": "Right",
+		"top": "Top",
+		"bottom": "Bottom",
+		"none": "None",
+		"paddingTop": "Top",
+		"paddingRight": "Right",
+		"paddingBottom": "Bottom",
+		"paddingLeft": "Left",
+		"topLeft": "Top Left",
+		"topRight": "Top Right",
+		"bottomLeft": "Bottom Left",
+		"bottomRight": "Bottom Right",
+		"svgColors": "SVG Colors",
+		"changeAll": "Change All",
+		"individualPaths": "Individual Paths",
+		"textDecoration": "Text Decoration",
+		"fontWeight": "Font Weight",
+		"textTransform": "Text Transform",
+		"lineHeight": "Line Height",
+		"letterSpacing": "Letter Spacing",
+		"gradients": "Gradients",
+		"linearGradient": "Linear",
+		"radialGradient": "Radial",
+		"meshGradient": "Mesh",
+		"gradientStops": "Gradient Stops",
+		"addGradientStop": "Add Stop",
+		"removeGradientStop": "Remove Stop",
+		"startPoint": "Start Point",
+		"endPoint": "End Point",
+		"radius": "Radius",
+		"angle": "Angle",
+		"centerX": "Center X",
+		"centerY": "Center Y",
+		"addGradient": "Add Gradient",
+		"shadow": "Shadow",
+		"xOffset": "X Offset",
+		"yOffset": "Y Offset",
+		"strokeWidth": "Stroke Width",
+		"strokeStyle": "Stroke Style",
+		"strokePosition": "Stroke Position",
+		"solid": "Solid",
+		"dashed": "Dashed",
+		"inside": "Inside",
+		"outside": "Outside",
+		"framePresets": "Frame Presets",
+		"presets": "Presets",
+		"selectPreset": "Select a preset…",
+		"phone": "Phone",
+		"tablet": "Tablet",
+		"desktop": "Desktop",
+		"presetLabels": {
+			"phone": {
+				"iphone15Pro": "iPhone 15 Pro (393×852)",
+				"iphone15ProMax": "iPhone 15 Pro Max (430×932)",
+				"iphone14": "iPhone 14 (390×844)",
+				"iphoneSE": "iPhone SE (375×667)",
+				"pixel7": "Pixel 7 (412×915)"
+			},
+			"tablet": {
+				"ipadPro11": "iPad Pro 11\" (834×1194)",
+				"ipadMini": "iPad Mini (744×1133)"
+			},
+			"desktop": {
+				"desktop": "Desktop (1440×1024)",
+				"macbookPro14": "MacBook Pro 14\" (1512×982)",
+				"macbookPro16": "MacBook Pro 16\" (1728×1117)",
+				"fullHD": "Full HD (1920×1080)"
+			}
+		}
+	},
+	"touchDevice": {
+		"title": "Mobile Support Coming Soon",
+		"description": "We're working hard to bring Clise to mobile devices. Currently, Clise is optimized for desktop use with mouse and keyboard.",
+		"features": {
+			"title": "Coming Soon:",
+			"items": [
+				"Mobile-optimized interface",
+				"Touch gestures for drawing",
+				"Multi-touch zoom and pan",
+				"Touch-friendly tools"
+			]
+		},
+		"note": "Please visit us on a desktop or laptop for the full experience."
+	},
+	"errorBoundary": {
+		"title": "Something went wrong",
+		"message": "An unrecoverable error occurred. You can try reloading the app. A report was prepared to help us fix this.",
+		"reload": "Reload"
+	},
+	"dragDrop": {
+		"onlyOneClise": "Please drop only one .clise file at a time",
+		"mixedTypes": "Please drop either .clise files or image files, not both at the same time",
+		"invalidFiles": "Please drop valid .clise files or image files (JPG, PNG, SVG)"
+	},
+	"imageImport": {
+		"invalidFiles": "Invalid image files:\n{{list}}",
+		"failed": "Failed to import one or more image files. Please try again."
+	},
+	"confirm": {
+		"title": "Confirm",
+		"ok": "OK",
+		"cancel": "Cancel"
+	}
 }
