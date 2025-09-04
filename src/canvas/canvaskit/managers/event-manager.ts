@@ -1,5 +1,6 @@
 import type React from "react";
-import type { Element, Tool } from "../../../store/atoms";
+import type { Tool } from "../../../store/atoms";
+import type { Element } from "../../../store/elements/element-types";
 import { getElementAtPoint, getResizeHandle } from "../../utils";
 import { ContextMenuManager } from "./context-menu-manager";
 import { CursorManager, type CursorType } from "./cursor-manager";
@@ -426,6 +427,37 @@ export class EventManager {
 			}
 		}
 
+		// Handle arrow key movement for selected elements
+		if (deps.selection.length > 0) {
+			const moveStep = e.shiftKey ? 10 : 1; // Shift for larger steps
+			let deltaX = 0;
+			let deltaY = 0;
+
+			switch (e.key) {
+				case "ArrowLeft":
+					e.preventDefault();
+					deltaX = -moveStep;
+					break;
+				case "ArrowRight":
+					e.preventDefault();
+					deltaX = moveStep;
+					break;
+				case "ArrowUp":
+					e.preventDefault();
+					deltaY = -moveStep;
+					break;
+				case "ArrowDown":
+					e.preventDefault();
+					deltaY = moveStep;
+					break;
+			}
+
+			if (deltaX !== 0 || deltaY !== 0) {
+				this.moveSelectedElements(deps, deltaX, deltaY);
+				return;
+			}
+		}
+
 		// Handle shortcuts with Ctrl/Cmd
 		if (e.ctrlKey || e.metaKey) {
 			switch (e.key) {
@@ -474,6 +506,102 @@ export class EventManager {
 			if (!(e.ctrlKey || e.metaKey) && deps.selection.length > 0) {
 				e.preventDefault();
 				this.callbacks.duplicateElements(deps.selection);
+			}
+		}
+	}
+
+	/**
+	 * Move selected elements by the given delta
+	 */
+	private moveSelectedElements(
+		deps: EventManagerDependencies,
+		deltaX: number,
+		deltaY: number,
+	): void {
+		if (deps.selection.length === 0) return;
+
+		// Collect all elements to move (including frame children)
+		const elementsToMove = new Set<string>();
+		const elementsById = new Map(deps.elements.map((e) => [e.id, e] as const));
+		const childrenByParent = new Map<string, Element[]>();
+
+		// Build parent-child mapping
+		for (const el of deps.elements) {
+			if (!el.parentId) continue;
+			const arr = childrenByParent.get(el.parentId) ?? [];
+			arr.push(el);
+			if (!childrenByParent.has(el.parentId))
+				childrenByParent.set(el.parentId, arr);
+		}
+
+		// Get all frame descendants recursively
+		const getFrameDescendants = (frameId: string) => {
+			const stack = [frameId];
+			while (stack.length) {
+				const pid = stack.pop()!;
+				const kids = childrenByParent.get(pid) ?? [];
+				for (const child of kids) {
+					elementsToMove.add(child.id);
+					if (child.type === "frame") stack.push(child.id);
+				}
+			}
+		};
+
+		// Add selected elements and their frame children
+		for (const elementId of deps.selection) {
+			const element = elementsById.get(elementId);
+			if (element) {
+				elementsToMove.add(elementId);
+				if (element.type === "frame") {
+					getFrameDescendants(elementId);
+				}
+			}
+		}
+
+		// Move all collected elements
+		const affectedGroupIds = new Set<string>();
+		for (const elementId of elementsToMove) {
+			const element = elementsById.get(elementId);
+			if (element) {
+				// Skip moving locked elements
+				if (element.locked) {
+					continue;
+				}
+
+				// Handle line elements specially - move both endpoints
+				if (element.type === "line" && "x2" in element && "y2" in element) {
+					this.callbacks.updateElementPosition({
+						id: elementId,
+						position: {
+							x: element.x + deltaX,
+							y: element.y + deltaY,
+							w: element.w,
+							h: element.h,
+						},
+					});
+				} else {
+					// Regular element movement
+					this.callbacks.updateElementPosition({
+						id: elementId,
+						position: {
+							x: element.x + deltaX,
+							y: element.y + deltaY,
+						},
+					});
+				}
+
+				// Track groups that contain moved elements
+				if (this.callbacks.getElementGroup) {
+					const containingGroup = this.callbacks.getElementGroup(elementId);
+					if (containingGroup) affectedGroupIds.add(containingGroup.id);
+				}
+			}
+		}
+
+		// Update bounds for any groups that were affected by movement
+		if (this.callbacks.updateGroupBounds) {
+			for (const groupId of affectedGroupIds) {
+				this.callbacks.updateGroupBounds(groupId);
 			}
 		}
 	}
