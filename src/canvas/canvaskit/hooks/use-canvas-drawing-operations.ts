@@ -6,11 +6,21 @@ import {
 	useIsDrawing,
 	useSelection,
 } from "../../../store";
+import {
+	useCommandDispatcher,
+	createRect,
+	createEllipse,
+	createText,
+	createLine,
+	createElement,
+} from "../../../commands";
+import type { FrameElement } from "../../../store/elements/element-types";
 
 export const useCanvasDrawingOperations = () => {
 	const { t } = useTranslation();
-	const { addElement, updateElement } = useElementOperations();
-	const [selection, setSelection] = useSelection();
+	const { dispatch } = useCommandDispatcher();
+	const { updateElement } = useElementOperations(); // Keep for real-time drawing updates
+	const [selection] = useSelection();
 	const [isDrawing, setIsDrawing] = useIsDrawing();
 	const [dragStart, setDragStart] = useDragStart();
 	const elementsById = useElementsById();
@@ -37,101 +47,51 @@ export const useCanvasDrawingOperations = () => {
 		if (!elementType) return;
 
 		if (elementType === "text") {
-			const defaultText = "";
-			const fontSize = 16;
-			const approximateCharWidth = fontSize * 0.6;
-			const calculatedWidth = Math.max(
-				20,
-				defaultText.length * approximateCharWidth,
-			); // Minimum width
-			const calculatedHeight = fontSize * 1.2;
-
-			const textElement = {
-				type: "text" as const,
-				x: startCoords.x,
-				y: startCoords.y,
-				w: calculatedWidth,
-				h: calculatedHeight,
-				fill: "transparent",
-				opacity: 1,
-				visible: true,
-				parentId: null,
-				rotation: 0,
-				name: `${t("elements.text")} ${Date.now()}`,
-				text: defaultText,
-				color: "#000000",
-				fontSize: fontSize,
-				fontFamily: "Arial, sans-serif",
-				textDecoration: "none",
-				fontWeight: "normal",
-				textTransform: "none",
-				lineHeight: 1.2,
-				letterSpacing: 0,
-			};
-
-			const elementId = addElement(textElement);
+			dispatch(createText(startCoords.x, startCoords.y, ""));
 			setIsDrawing(false); // Don't set as drawing since we want to edit immediately
 			setDragStart(null);
-			setSelection([elementId]);
 
 			// Start editing immediately
 			// We need to trigger text editing after element creation
-			return elementId;
+			return; // Commands handle selection automatically
 		}
 
 		if (elementType === "line") {
-			const lineElement = {
-				type: "line" as const,
-				x: startCoords.x,
-				y: startCoords.y,
-				w: 0, // Not used for lines, but required by BaseElement
-				h: 0, // Not used for lines, but required by BaseElement
-				x2: startCoords.x, // Initially same as start point
-				y2: startCoords.y, // Initially same as start point
-				fill: "transparent",
-				stroke: {
-					color: "#495057",
-					width: 2,
-					opacity: 1,
-					style: "solid" as const,
-					position: "center" as const,
-				},
-				opacity: 1,
-				visible: true,
-				parentId: null,
-				rotation: 0,
-				name: `${t("elements.line")} ${Date.now()}`,
-			};
-
-			const elementId = addElement(lineElement);
-
+			dispatch(
+				createLine(startCoords.x, startCoords.y, startCoords.x, startCoords.y),
+			);
 			setIsDrawing(true);
 			setDragStart(startCoords);
-			setSelection([elementId]);
 			return;
 		}
 
-		const fillColor = elementType === "frame" ? "#ffffff" : "#e5e5e5";
-		const newElement = {
-			type: elementType as "rect" | "ellipse" | "frame",
-			x: startCoords.x,
-			y: startCoords.y,
-			w: 1,
-			h: 1,
-			fill: fillColor,
-			opacity: 1,
-			visible: true,
-			parentId: null,
-			rotation: 0,
-			name: `${t(`elements.${elementType}`)} ${Date.now()}`,
-			...(elementType === "frame" ? { clipContent: true } : {}),
-		};
-
-		const elementId = addElement(newElement);
+		if (elementType === "rect") {
+			dispatch(createRect(startCoords.x, startCoords.y, 1, 1));
+		} else if (elementType === "ellipse") {
+			dispatch(createEllipse(startCoords.x, startCoords.y, 1, 1));
+		} else if (elementType === "frame") {
+			// Create frame with custom properties using createElement
+			dispatch(
+				createElement<FrameElement>({
+					type: "frame",
+					x: startCoords.x,
+					y: startCoords.y,
+					w: 1,
+					h: 1,
+					name: `${t("elements.frame")} ${Date.now()}`,
+					rotation: 0,
+					fill: "#ffffff",
+					opacity: 1,
+					visible: true,
+					locked: false,
+					parentId: null,
+					clipContent: true,
+				}),
+			);
+		}
 
 		setIsDrawing(true);
 		setDragStart(startCoords);
-		setSelection([elementId]);
 	};
 
 	const updateDrawing = (currentCoords: { x: number; y: number }) => {

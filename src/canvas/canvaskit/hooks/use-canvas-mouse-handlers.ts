@@ -37,6 +37,7 @@ import { useCoordinateTransforms } from "./use-coordinate-transforms";
 import { ResizeManager } from "../managers/resize-manager";
 import { PathEditingManager } from "../managers/path-editing-manager";
 import { useCanvasDrawingOperations } from "./use-canvas-drawing-operations";
+import { useCommandDispatcher, createPath } from "../../../commands";
 
 export const useCanvasMouseHandlers = ({
 	canvasRef,
@@ -61,8 +62,7 @@ export const useCanvasMouseHandlers = ({
 	const elementsById = useElementsById();
 	const childrenByParent = useChildrenByParentId();
 	const [tool, setTool] = useTool();
-	const { addElement, updateElementPosition, updateElement } =
-		useElementOperations();
+	const { updateElementPosition, updateElement } = useElementOperations();
 	const updateParentChildRelationships =
 		useDebouncedUpdateParentChildRelationships();
 	const { startDrawing, updateDrawing } = useCanvasDrawingOperations();
@@ -70,6 +70,7 @@ export const useCanvasMouseHandlers = ({
 	const groups = useGroups();
 	const elementIdToGroupMap = useElementIdToGroupMap();
 	const { startTransaction, commitTransaction } = useHistoryOperations();
+	const { dispatch } = useCommandDispatcher();
 
 	// Path editing state
 	const [isEditingPath] = useIsEditingPath();
@@ -177,30 +178,7 @@ export const useCanvasMouseHandlers = ({
 			undefined;
 		if (!currentPath) {
 			// start new path with first point
-			const base = {
-				type: "path" as const,
-				x: pt.x,
-				y: pt.y,
-				w: 1,
-				h: 1,
-				points: [{ x: 0, y: 0 }],
-				closed: false,
-				fill: "transparent",
-				stroke: {
-					color: "#495057",
-					width: 5,
-					opacity: 1,
-					style: "solid" as const,
-					position: "center" as const,
-				},
-				opacity: 1,
-				visible: true,
-				parentId: null,
-				rotation: 0,
-				name: `path ${Date.now()}`,
-			};
-			const newId = addElement(base);
-			setSelection([newId]);
+			dispatch(createPath(pt.x, pt.y));
 			setIsDrawing(true);
 			return;
 		}

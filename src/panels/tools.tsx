@@ -1,11 +1,5 @@
-import {
-	type Tool,
-	useElementOperations,
-	useSelection,
-	useTool,
-	useZoom,
-	useZoomControls,
-} from "@store/index";
+import { type Tool, useTool, useZoom, useZoomControls } from "@store/index";
+import { useCommandDispatcher, createElement } from "../commands";
 import { usePan, useViewport } from "@store/viewport-hooks";
 import {
 	Circle,
@@ -64,8 +58,7 @@ export function BottomToolbar({ className }: { className?: string }) {
 	const [tool, setTool] = useTool();
 	const [zoom] = useZoom();
 	const { zoomIn, zoomOut, setZoom } = useZoomControls();
-	const { addElement } = useElementOperations();
-	const [, setSelection] = useSelection();
+	const { dispatch } = useCommandDispatcher();
 	const { pan } = usePan();
 	const { viewport } = useViewport();
 
@@ -100,8 +93,7 @@ export function BottomToolbar({ className }: { className?: string }) {
 					file.name,
 				);
 
-				const elementId = addElement(imageElement);
-				setSelection([elementId]);
+				dispatch(createElement(imageElement));
 				setTool("select"); // Switch back to select tool after adding image
 			} catch (error) {
 				captureError(error as Error, { context: "Failed to add image" });

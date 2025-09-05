@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import {
-	useCanvasKeyboardHandlers,
 	useCanvasMouseHandlers,
 	useMouseInteractionHandlers,
 	useViewport,
 } from "../hooks";
+import { useCommandBasedKeyboardHandlers } from "../../../commands";
 import { useIsPanning } from "@store/index";
 
 export const useCanvasEvents = (
@@ -13,7 +13,7 @@ export const useCanvasEvents = (
 	const { zoom, pan, handleWheel, setPan } = useViewport();
 	const [, setIsPanning] = useIsPanning();
 
-	useCanvasKeyboardHandlers();
+	useCommandBasedKeyboardHandlers();
 
 	const { handleMouseDown, handleMouseMove, handleMouseUp, handleDoubleClick } =
 		useCanvasMouseHandlers({
