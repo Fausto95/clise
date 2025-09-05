@@ -30,12 +30,11 @@ const ConfirmContext = createContext<ConfirmContextType | undefined>(undefined);
 const ConfirmOverlayBase: React.FC<
 	WithTranslation & { state: InternalState; onClose: (v: boolean) => void }
 > = ({ state, onClose, t }) => {
-	if (!state) return null;
-	const { title, message, confirmText, cancelText, id } = state;
 	const modalRef = useRef<HTMLDivElement | null>(null);
 
 	// Focus management + trap
 	useEffect(() => {
+		if (!state) return;
 		const container = modalRef.current;
 		if (!container) return;
 
@@ -73,7 +72,11 @@ const ConfirmOverlayBase: React.FC<
 		};
 		document.addEventListener("keydown", onKeyDown);
 		return () => document.removeEventListener("keydown", onKeyDown);
-	}, [onClose, id]);
+	}, [onClose, state]);
+
+	if (!state) return null;
+	const { title, message, confirmText, cancelText, id } = state;
+
 	return (
 		<div className="confirm-overlay" role="dialog" aria-modal="true">
 			<div
@@ -125,7 +128,9 @@ export const ConfirmProvider: React.FC<{ children: React.ReactNode }> = ({
 			if (prevActiveRef.current) {
 				try {
 					prevActiveRef.current.focus();
-				} catch {}
+				} catch {
+					// Ignore focus errors
+				}
 			}
 			return null;
 		});

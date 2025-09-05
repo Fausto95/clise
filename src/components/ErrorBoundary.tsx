@@ -16,6 +16,31 @@ type ErrorBoundaryState = {
 	cleared?: boolean;
 };
 
+// Separate component to avoid conditional hook usage
+const ClearDataButton: React.FC<{
+	onClear: () => void;
+	t: WithTranslation["t"];
+}> = ({ onClear, t }) => {
+	const confirm = useConfirm();
+	const onClick = async () => {
+		const ok = await confirm({
+			message: t(
+				"file.clearStorageConfirm",
+				"Clear saved data in storage? This will remove persisted elements and settings.",
+			),
+		});
+		if (ok) {
+			onClear();
+			window.setTimeout(() => window.location.reload(), 300);
+		}
+	};
+	return (
+		<button className="error-boundary__button" onClick={onClick}>
+			{t("file.clearSavedData", "Clear Saved Data")}
+		</button>
+	);
+};
+
 class ErrorBoundaryBase extends React.Component<
 	ErrorBoundaryProps,
 	ErrorBoundaryState
@@ -41,33 +66,20 @@ class ErrorBoundaryBase extends React.Component<
 		try {
 			localStorage.removeItem("clise-app-state");
 			this.setState({ cleared: true });
-		} catch {}
+		} catch {
+			// Ignore localStorage errors
+		}
 	};
 
 	render() {
 		if (this.state.hasError) {
 			const { t, fallback } = this.props;
 			if (fallback) return fallback;
-			const ConfirmClearButton: React.FC = () => {
-				const confirm = useConfirm();
-				const onClick = async () => {
-					const ok = await confirm({
-						message: t(
-							"file.clearStorageConfirm",
-							"Clear saved data in storage? This will remove persisted elements and settings.",
-						),
-					});
-					if (ok) {
-						this.handleClearStorage();
-						window.setTimeout(() => window.location.reload(), 300);
-					}
-				};
-				return (
-					<button className="error-boundary__button" onClick={onClick}>
-						{t("file.clearSavedData", "Clear Saved Data")}
-					</button>
-				);
-			};
+
+			// Create the clear button component outside of conditional logic
+			const clearButton = (
+				<ClearDataButton onClear={this.handleClearStorage} t={t} />
+			);
 
 			return (
 				<div className="error-boundary">
@@ -76,7 +88,7 @@ class ErrorBoundaryBase extends React.Component<
 						{t("errorBoundary.message")}
 					</p>
 					<div className="error-boundary__actions">
-						<ConfirmClearButton />
+						{clearButton}
 						<button
 							className="error-boundary__button"
 							onClick={this.handleReload}
