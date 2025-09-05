@@ -20,6 +20,7 @@ import {
 	useTool,
 	useIsDrawing,
 	useGroups,
+	useHistoryOperations,
 } from "../store";
 
 export const useCommandBasedKeyboardHandlers = () => {
@@ -32,6 +33,7 @@ export const useCommandBasedKeyboardHandlers = () => {
 	const elementsById = useElementsById();
 	const groups = useGroups();
 	const { dispatch } = useCommandDispatcher();
+	const { undo, redo } = useHistoryOperations();
 
 	useEffect(() => {
 		const isEditableTarget = (event: KeyboardEvent) => {
@@ -175,6 +177,17 @@ export const useCommandBasedKeyboardHandlers = () => {
 							dispatch(reorderElements(selection, "send-backward"));
 						}
 						break;
+					case "z":
+					case "Z":
+						e.preventDefault();
+						if (e.shiftKey) {
+							// Redo: Cmd/Ctrl + Shift + Z
+							redo();
+						} else {
+							// Undo: Cmd/Ctrl + Z
+							undo();
+						}
+						break;
 				}
 			}
 
@@ -203,5 +216,7 @@ export const useCommandBasedKeyboardHandlers = () => {
 		setTool,
 		tool,
 		dispatch,
+		undo,
+		redo,
 	]);
 };
