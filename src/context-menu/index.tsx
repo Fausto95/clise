@@ -1,9 +1,7 @@
 import {
 	useClipboard,
-	useElementOperations,
 	useElements,
 	useElementsById,
-	useGroupOperations,
 	useGroups,
 	useHistoryOperations,
 	useSelection,
@@ -11,6 +9,17 @@ import {
 	useZoom,
 	useViewport,
 } from "@store/index";
+import {
+	useCommandDispatcher,
+	copySelection,
+	pasteClipboard,
+	duplicateSelection,
+	deleteSelection,
+	createGroup,
+	ungroup,
+	reorderElements,
+	hideSelectedElements,
+} from "../commands";
 import React from "react";
 import { ContextMenu as SmartContextMenu } from "../components/context-menu/context-menu";
 import { useTranslation } from "react-i18next";
@@ -19,7 +28,6 @@ import {
 	exportSelectionAsSVG,
 } from "../export/export-utils";
 import { getElementsToExport } from "../store/file-operations";
-import { useElementVisibility } from "@store/hooks";
 
 export const ContextMenu: React.FC<{
 	x: number;
@@ -28,23 +36,15 @@ export const ContextMenu: React.FC<{
 	open: boolean;
 	onClose: () => void;
 	getCurrentCursorPosition: () => { canvasX: number; canvasY: number } | null;
-}> = ({ x, y, elementId, open, onClose, getCurrentCursorPosition }) => {
+}> = ({ x, y, elementId, open, onClose }) => {
 	const { t } = useTranslation();
 	const elements = useElements();
 	const elementsById = useElementsById();
 	const [selection] = useSelection();
 	const clipboard = useClipboard();
-	const {
-		reorderElements,
-		copyElements,
-		pasteElements,
-		duplicateElements,
-		deleteElements,
-	} = useElementOperations();
-	const { push, undo, redo } = useHistoryOperations();
-	const { createGroup, ungroup } = useGroupOperations();
+	const { undo, redo } = useHistoryOperations();
+	const { dispatch } = useCommandDispatcher();
 	const groups = useGroups();
-	const { toggleVisibility } = useElementVisibility();
 
 	// Viewport state for pan/zoom operations
 	const { pan, setPan } = usePan();
@@ -74,43 +74,34 @@ export const ContextMenu: React.FC<{
 		selection.length > 0 && selection.every((id) => indexMap.has(id));
 
 	const doAction = (action: "front" | "back" | "forward" | "backward") => {
-		push();
 		const operationMap = {
 			front: "bring-to-front" as const,
 			back: "send-to-back" as const,
 			forward: "bring-forward" as const,
 			backward: "send-backward" as const,
 		};
-		reorderElements({ elementIds: selection, operation: operationMap[action] });
+		dispatch(reorderElements(selection, operationMap[action]));
 		onClose();
 	};
 
 	const doCopy = () => {
-		copyElements(selection);
+		dispatch(copySelection());
 		onClose();
 	};
 
 	const doPaste = () => {
-		push();
-		const cursorPos = getCurrentCursorPosition();
-		if (cursorPos) {
-			pasteElements({ x: cursorPos.canvasX, y: cursorPos.canvasY });
-		} else {
-			pasteElements();
-		}
+		dispatch(pasteClipboard());
 		onClose();
 	};
 
 	const doDuplicate = () => {
-		push();
-		duplicateElements(selection);
+		dispatch(duplicateSelection());
 		onClose();
 	};
 
 	const doGroup = () => {
 		if (selection.length < 2) return;
-		push();
-		createGroup({ elementIds: selection });
+		dispatch(createGroup(selection));
 		onClose();
 	};
 
@@ -121,8 +112,7 @@ export const ContextMenu: React.FC<{
 		// Check if it's a group by id membership
 		const groupIds = new Set(groups.map((g) => g.id));
 		if (groupIds.has(groupId)) {
-			push();
-			ungroup(groupId);
+			dispatch(ungroup(groupId));
 			onClose();
 		}
 	};
@@ -139,15 +129,13 @@ export const ContextMenu: React.FC<{
 	// Removed - replaced with PNG/SVG exports
 
 	const doToggleVisibility = () => {
-		push();
-		selection.forEach((id) => toggleVisibility(id));
+		dispatch(hideSelectedElements());
 		onClose();
 	};
 
 	const doDelete = () => {
 		if (selection.length === 0) return;
-		push();
-		deleteElements(selection);
+		dispatch(deleteSelection());
 		onClose();
 	};
 
