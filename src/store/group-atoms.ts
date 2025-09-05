@@ -55,7 +55,7 @@ const calculateGroupBounds = (elementIds: string[], get: Getter) => {
 
 	const elements = elementIds
 		.map((id) => get(elementAtomFamily(id)))
-		.filter((el): el is NonNullable<typeof el> => el !== null);
+		.filter((el): el is NonNullable<typeof el> => el !== null && el.visible);
 
 	if (elements.length === 0) {
 		return { x: 0, y: 0, w: 0, h: 0 };
@@ -68,15 +68,25 @@ const calculateGroupBounds = (elementIds: string[], get: Getter) => {
 	let maxY = -Infinity;
 
 	for (const el of elements) {
+		// Skip elements with invalid dimensions
+		if (el.type !== "line" && (el.w === 0 || el.h === 0)) continue;
+
 		if (el.type === "line" && "x2" in el && "y2" in el) {
 			const left = Math.min(el.x, el.x2);
 			const right = Math.max(el.x, el.x2);
 			const top = Math.min(el.y, el.y2);
 			const bottom = Math.max(el.y, el.y2);
-			minX = Math.min(minX, left);
-			minY = Math.min(minY, top);
-			maxX = Math.max(maxX, right);
-			maxY = Math.max(maxY, bottom);
+
+			// Ensure lines have some minimal bounds (at least 1px)
+			const lineLeft = left;
+			const lineRight = right === left ? right + 1 : right;
+			const lineTop = top;
+			const lineBottom = bottom === top ? bottom + 1 : bottom;
+
+			minX = Math.min(minX, lineLeft);
+			minY = Math.min(minY, lineTop);
+			maxX = Math.max(maxX, lineRight);
+			maxY = Math.max(maxY, lineBottom);
 		} else {
 			const left = Math.min(el.x, el.x + el.w);
 			const right = Math.max(el.x, el.x + el.w);
@@ -89,11 +99,21 @@ const calculateGroupBounds = (elementIds: string[], get: Getter) => {
 		}
 	}
 
+	// If no valid elements were processed, return zero bounds
+	if (
+		!isFinite(minX) ||
+		!isFinite(maxX) ||
+		!isFinite(minY) ||
+		!isFinite(maxY)
+	) {
+		return { x: 0, y: 0, w: 0, h: 0 };
+	}
+
 	return {
-		x: isFinite(minX) ? minX : 0,
-		y: isFinite(minY) ? minY : 0,
-		w: isFinite(maxX - minX) ? maxX - minX : 0,
-		h: isFinite(maxY - minY) ? maxY - minY : 0,
+		x: minX,
+		y: minY,
+		w: maxX - minX,
+		h: maxY - minY,
 	};
 };
 

@@ -24,7 +24,13 @@ export class SmartGuidesManager {
 		snapY: number;
 		guides: GuideLine[];
 	} {
-		const { elements, selectedElementIds, tolerance, previousPosition, elementIdToGroupMap } = deps;
+		const {
+			elements,
+			selectedElementIds,
+			tolerance,
+			previousPosition,
+			elementIdToGroupMap,
+		} = deps;
 		const guides: GuideLine[] = [];
 		let snapX = targetX;
 		let snapY = targetY;
@@ -38,17 +44,18 @@ export class SmartGuidesManager {
 		);
 
 		// Check if we're dragging a group (draggedElement.id would be a group ID)
-		const isDraggingGroup = selectedElementIds.length === 1 && 
-			!elements.some(el => el.id === draggedElement.id);
-		
+		const isDraggingGroup =
+			selectedElementIds.length === 1 &&
+			!elements.some((el) => el.id === draggedElement.id);
+
 		// Get other elements for snapping
 		const otherElements = elements.filter((el) => {
 			// Skip hidden elements
 			if (!el.visible) return false;
-			
+
 			// Skip the dragged element itself (if it's actually an element)
 			if (el.id === draggedElement.id) return false;
-			
+
 			if (isDraggingGroup) {
 				// When dragging a group, exclude all elements in the selected groups
 				// The draggedElement.id is actually a group ID in this case
@@ -59,7 +66,7 @@ export class SmartGuidesManager {
 			} else {
 				// When dragging individual elements, skip other selected elements
 				if (selectedElementIds.includes(el.id)) return false;
-				
+
 				// If dragged element is in a group, include other elements in the same group
 				const draggedElementGroup = elementIdToGroupMap.get(draggedElement.id);
 				if (draggedElementGroup) {
@@ -69,7 +76,7 @@ export class SmartGuidesManager {
 					}
 				}
 			}
-			
+
 			// Include all other visible elements (grouped or ungrouped)
 			return true;
 		});

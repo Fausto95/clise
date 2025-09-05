@@ -691,12 +691,12 @@ export const useCanvasMouseHandlers = ({
 
 				// Create a virtual element representing the dragged item (group or element)
 				let draggedItem: Element | null = null;
-				
+
 				if (group) {
 					// For groups, create a virtual element with the group's bounds
 					draggedItem = {
 						id: group.id,
-						type: 'rect' as const,
+						type: "rect" as const,
 						x: group.x,
 						y: group.y,
 						w: group.w,
@@ -704,7 +704,7 @@ export const useCanvasMouseHandlers = ({
 						parentId: null,
 						rotation: 0,
 						name: group.name,
-						fill: 'transparent',
+						fill: "transparent",
 						opacity: 1,
 						visible: true,
 					};

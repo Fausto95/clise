@@ -24,7 +24,8 @@ export const useGroupIds = () => useAtomValue(groupIdsAtom);
 export const useGetElementGroup = () => useAtomValue(getElementGroupAtom);
 export const useIsElementGrouped = () => useAtomValue(isElementGroupedAtom);
 export const useGroupedElementIds = () => useAtomValue(groupedElementIdsAtom);
-export const useElementIdToGroupMap = () => useAtomValue(elementIdToGroupMapAtom);
+export const useElementIdToGroupMap = () =>
+	useAtomValue(elementIdToGroupMapAtom);
 
 // Group mutation hooks
 export const useCreateGroup = () => useSetAtom(createGroupAtom);
