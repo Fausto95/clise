@@ -529,6 +529,7 @@ export const useCanvasMouseHandlers = ({
 			const selectedElements = elements.filter((element) => {
 				return (
 					element.locked !== true &&
+					element.visible === true &&
 					element.x + element.w > selectionRect.x &&
 					element.x < selectionRect.x + selectionRect.width &&
 					element.y + element.h > selectionRect.y &&

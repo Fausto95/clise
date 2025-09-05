@@ -46,14 +46,20 @@ const checkAndCleanupGroup = (get: Getter, set: Setter, groupId: string) => {
 	});
 
 	if (visibleElementIds.length < 2) {
-		// Disband the group
+		// Ungroup the remaining elements
 		const currentGroupIds = get(groupIdsAtom);
 		const newGroupIds = currentGroupIds.filter((id) => id !== groupId);
 		set(groupIdsAtom, newGroupIds);
 		set(groupAtomFamily(groupId), null);
 
-		// Remove from selection if selected
-		set(selectionAtom, (prev: string[]) => prev.filter((id) => id !== groupId));
+		// If the group was selected, select the remaining elements instead
+		const currentSelection = get(selectionAtom);
+		if (currentSelection.includes(groupId)) {
+			const newSelection = currentSelection
+				.filter((id) => id !== groupId)
+				.concat(group.elementIds); // Select the ungrouped elements
+			set(selectionAtom, newSelection);
+		}
 	}
 };
 
@@ -350,7 +356,7 @@ export const deleteElementsAtom = atom(null, (get, set, ids: string[]) => {
 		}
 	}
 
-	// Disband groups with fewer than 2 elements
+	// Ungroup groups with fewer than 2 elements
 	if (groupsToDisband.length > 0) {
 		const currentGroupIds = get(groupIdsAtom);
 		const newGroupIds = currentGroupIds.filter(
@@ -358,15 +364,35 @@ export const deleteElementsAtom = atom(null, (get, set, ids: string[]) => {
 		);
 		set(groupIdsAtom, newGroupIds);
 
-		// Remove the group atoms
+		// Collect remaining elements from disbanded groups for selection
+		const remainingElementsToSelect: string[] = [];
+
+		// Remove the group atoms and collect remaining elements
 		groupsToDisband.forEach((groupId) => {
+			const group = get(groupAtomFamily(groupId));
+			if (group) {
+				// Add remaining elements (those that weren't deleted) to selection
+				const remainingElements = group.elementIds.filter(
+					(elementId) => !allIdsToDelete.includes(elementId),
+				);
+				remainingElementsToSelect.push(...remainingElements);
+			}
 			set(groupAtomFamily(groupId), null);
 		});
 
-		// Remove disbanded groups from selection if they were selected
-		set(selectionAtom, (prev: string[]) =>
-			prev.filter((id) => !groupsToDisband.includes(id)),
-		);
+		// Update selection: remove disbanded groups and add their remaining elements
+		set(selectionAtom, (prev: string[]) => {
+			const filteredSelection = prev.filter(
+				(id) => !groupsToDisband.includes(id),
+			);
+			// Only add remaining elements if any of the disbanded groups were selected
+			const shouldSelectRemainingElements = prev.some((id) =>
+				groupsToDisband.includes(id),
+			);
+			return shouldSelectRemainingElements
+				? [...filteredSelection, ...remainingElementsToSelect]
+				: filteredSelection;
+		});
 	}
 });
 
