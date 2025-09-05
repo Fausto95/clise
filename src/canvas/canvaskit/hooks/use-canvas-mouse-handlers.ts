@@ -1,5 +1,5 @@
 import type React from "react";
-import type { PathElement } from "../../../store/element-atoms";
+import type { PathElement, Element } from "../../../store/element-atoms";
 import {
 	useBoxSelectEnd,
 	useBoxSelectStart,
@@ -12,6 +12,7 @@ import {
 	useChildrenByParentId,
 	useGroupOperations,
 	useGroups,
+	useElementIdToGroupMap,
 	useHistoryOperations,
 	useIsBoxSelecting,
 	useIsDragging,
@@ -67,6 +68,7 @@ export const useCanvasMouseHandlers = ({
 	const { startDrawing, updateDrawing } = useCanvasDrawingOperations();
 	const { getElementGroup, updateGroupBounds } = useGroupOperations();
 	const groups = useGroups();
+	const elementIdToGroupMap = useElementIdToGroupMap();
 	const { startTransaction, commitTransaction } = useHistoryOperations();
 
 	// Path editing state
@@ -678,18 +680,44 @@ export const useCanvasMouseHandlers = ({
 				}
 			}
 
-			// Apply smart guides if enabled and we have a single selected element
+			// Apply smart guides if enabled and we have a single selected item (element or group)
 			let finalDeltaX = deltaX;
 			let finalDeltaY = deltaY;
 
 			if (smartGuides.enabled && selection.length === 1) {
-				const draggedElement = elementsById.get(selection[0]!);
-				if (draggedElement) {
-					const targetX = draggedElement.x + deltaX;
-					const targetY = draggedElement.y + deltaY;
+				const selectedId = selection[0]!;
+				const group = groupById.get(selectedId);
+				const draggedElement = group ? null : elementsById.get(selectedId);
+
+				// Create a virtual element representing the dragged item (group or element)
+				let draggedItem: Element | null = null;
+				
+				if (group) {
+					// For groups, create a virtual element with the group's bounds
+					draggedItem = {
+						id: group.id,
+						type: 'rect' as const,
+						x: group.x,
+						y: group.y,
+						w: group.w,
+						h: group.h,
+						parentId: null,
+						rotation: 0,
+						name: group.name,
+						fill: 'transparent',
+						opacity: 1,
+						visible: true,
+					};
+				} else if (draggedElement) {
+					draggedItem = draggedElement;
+				}
+
+				if (draggedItem) {
+					const targetX = draggedItem.x + deltaX;
+					const targetY = draggedItem.y + deltaY;
 
 					const snapResult = smartGuidesManager.findSnapPoints(
-						draggedElement,
+						draggedItem,
 						targetX,
 						targetY,
 						{
@@ -697,6 +725,7 @@ export const useCanvasMouseHandlers = ({
 							selectedElementIds: selection,
 							tolerance: smartGuides.tolerance,
 							previousPosition: smartGuides.previousPosition || undefined,
+							elementIdToGroupMap,
 						},
 					);
 
@@ -709,8 +738,8 @@ export const useCanvasMouseHandlers = ({
 					smartGuides.setIsSnapping(snapResult.guides.length > 0);
 
 					// Use snapped coordinates - simple like the demo
-					finalDeltaX = snapResult.snapX - draggedElement.x;
-					finalDeltaY = snapResult.snapY - draggedElement.y;
+					finalDeltaX = snapResult.snapX - draggedItem.x;
+					finalDeltaY = snapResult.snapY - draggedItem.y;
 
 					// Update previous position for next frame
 					smartGuides.setPreviousPosition({ x: targetX, y: targetY });

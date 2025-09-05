@@ -1,11 +1,13 @@
 import type { Element } from "../../../store/element-atoms";
 import type { GuideLine } from "../../../store/smart-guides-atoms";
+import type { Group } from "../../../store/group-atoms";
 
 export interface SmartGuidesManagerDependencies {
 	elements: Element[];
 	selectedElementIds: string[];
 	tolerance: number;
 	previousPosition?: { x: number; y: number };
+	elementIdToGroupMap: Map<string, Group>;
 }
 
 export class SmartGuidesManager {
@@ -22,7 +24,7 @@ export class SmartGuidesManager {
 		snapY: number;
 		guides: GuideLine[];
 	} {
-		const { elements, selectedElementIds, tolerance, previousPosition } = deps;
+		const { elements, selectedElementIds, tolerance, previousPosition, elementIdToGroupMap } = deps;
 		const guides: GuideLine[] = [];
 		let snapX = targetX;
 		let snapY = targetY;
@@ -35,11 +37,42 @@ export class SmartGuidesManager {
 			tolerance,
 		);
 
-		// Get other elements (excluding the dragged element and other selected elements)
-		const otherElements = elements.filter(
-			(el) =>
-				el.id !== draggedElement.id && !selectedElementIds.includes(el.id),
-		);
+		// Check if we're dragging a group (draggedElement.id would be a group ID)
+		const isDraggingGroup = selectedElementIds.length === 1 && 
+			!elements.some(el => el.id === draggedElement.id);
+		
+		// Get other elements for snapping
+		const otherElements = elements.filter((el) => {
+			// Skip hidden elements
+			if (!el.visible) return false;
+			
+			// Skip the dragged element itself (if it's actually an element)
+			if (el.id === draggedElement.id) return false;
+			
+			if (isDraggingGroup) {
+				// When dragging a group, exclude all elements in the selected groups
+				// The draggedElement.id is actually a group ID in this case
+				const elementGroup = elementIdToGroupMap.get(el.id);
+				if (elementGroup && selectedElementIds.includes(elementGroup.id)) {
+					return false;
+				}
+			} else {
+				// When dragging individual elements, skip other selected elements
+				if (selectedElementIds.includes(el.id)) return false;
+				
+				// If dragged element is in a group, include other elements in the same group
+				const draggedElementGroup = elementIdToGroupMap.get(draggedElement.id);
+				if (draggedElementGroup) {
+					const elementGroup = elementIdToGroupMap.get(el.id);
+					if (elementGroup && elementGroup.id === draggedElementGroup.id) {
+						return true;
+					}
+				}
+			}
+			
+			// Include all other visible elements (grouped or ungrouped)
+			return true;
+		});
 
 		// Calculate dragged element's key points
 		const draggedPoints = this.getElementPoints(
@@ -167,6 +200,11 @@ export class SmartGuidesManager {
 		const guides: GuideLine[] = [];
 		let horizontal = false;
 		let vertical = false;
+
+		// Skip if either element is hidden
+		if (!element1.visible || !element2.visible) {
+			return { horizontal, vertical, guides };
+		}
 
 		const points1 = this.getElementPoints(element1, element1.x, element1.y);
 		const points2 = this.getElementPoints(element2, element2.x, element2.y);
