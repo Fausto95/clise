@@ -725,18 +725,13 @@ export class CanvasKitRenderer {
 
 		// Draw a single selection outline for each selected group
 		if (selectedGroups.length > 0) {
-			const padding = 8;
 			for (const group of selectedGroups) {
-				const left = group.x - padding;
-				const top = group.y - padding;
-				const width = group.w + padding * 2;
-				const height = group.h + padding * 2;
 				this.selectionRenderer.drawSelectionOutline(
 					canvasContext,
-					left,
-					top,
-					width,
-					height,
+					group.x,
+					group.y,
+					group.w,
+					group.h,
 					zoom,
 				);
 				// Intentionally skip resize handles for groups until interactions support it

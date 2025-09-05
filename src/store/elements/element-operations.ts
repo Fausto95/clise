@@ -1,8 +1,15 @@
-import { atom, useSetAtom } from "jotai";
+import { atom, useSetAtom, type Getter, type Setter } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 import { findContainingFrame } from "../../canvas/utils";
 import { isTransactionAtom, pushHistoryAtom } from "../history-atoms";
 import { selectionAtom, bumpSelectionRecalcAtom } from "../selection-atoms";
+import {
+	elementIdToGroupMapAtom,
+	updateGroupBoundsAtom,
+	groupsAtom,
+	groupAtomFamily,
+	groupIdsAtom,
+} from "../group-atoms";
 import {
 	elementIdsAtom,
 	elementAtomFamily,
@@ -13,6 +20,48 @@ import type { Element, ElementPatch } from "./element-types";
 import { migrateBlurStructure } from "./element-types";
 
 const uid = () => uuidv4();
+
+// Helper function to update group bounds for an element if it's in a group
+const updateElementGroupBounds = (
+	get: Getter,
+	set: Setter,
+	elementId: string,
+) => {
+	const elementIdToGroupMap = get(elementIdToGroupMapAtom);
+	const group = elementIdToGroupMap.get(elementId);
+	if (group) {
+		set(updateGroupBoundsAtom, group.id);
+	}
+};
+
+// Helper function to check if a group should be disbanded due to insufficient visible elements
+const checkAndCleanupGroup = (get: Getter, set: Setter, groupId: string) => {
+	const group = get(groupAtomFamily(groupId));
+	if (!group) return;
+
+	// Count visible elements in the group
+	const visibleElementIds = group.elementIds.filter((elementId) => {
+		const element = get(elementAtomFamily(elementId));
+		return element && element.visible;
+	});
+
+	if (visibleElementIds.length < 2) {
+		// Ungroup the remaining elements
+		const currentGroupIds = get(groupIdsAtom);
+		const newGroupIds = currentGroupIds.filter((id) => id !== groupId);
+		set(groupIdsAtom, newGroupIds);
+		set(groupAtomFamily(groupId), null);
+
+		// If the group was selected, select the remaining elements instead
+		const currentSelection = get(selectionAtom);
+		if (currentSelection.includes(groupId)) {
+			const newSelection = currentSelection
+				.filter((id) => id !== groupId)
+				.concat(group.elementIds); // Select the ungrouped elements
+			set(selectionAtom, newSelection);
+		}
+	}
+};
 
 // Create element atom (renamed from createElementAtom)
 export const addElementAtom = atom(
@@ -117,6 +166,17 @@ export const updateElementAtom = atom(
 		}
 
 		set(elementAtomFamily(id), updatedElement);
+
+		// Update group bounds if this element is part of a group and position/size changed
+		if (
+			patch.x !== undefined ||
+			patch.y !== undefined ||
+			patch.w !== undefined ||
+			patch.h !== undefined ||
+			patch.visible !== undefined
+		) {
+			updateElementGroupBounds(get, set, id);
+		}
 	},
 );
 
@@ -271,6 +331,69 @@ export const deleteElementsAtom = atom(null, (get, set, ids: string[]) => {
 			set(elementAtomFamily(remainingId), { ...element, parentId: null });
 		}
 	});
+
+	// Clean up groups that now have fewer than 2 elements
+	const groups = get(groupsAtom);
+	const groupsToDisband: string[] = [];
+
+	for (const group of groups) {
+		// Remove deleted elements from the group
+		const remainingElementIds = group.elementIds.filter(
+			(elementId) => !allIdsToDelete.includes(elementId),
+		);
+
+		if (remainingElementIds.length < 2) {
+			// Group has fewer than 2 elements, mark for disbanding
+			groupsToDisband.push(group.id);
+		} else if (remainingElementIds.length < group.elementIds.length) {
+			// Some elements were removed, update the group
+			set(groupAtomFamily(group.id), {
+				...group,
+				elementIds: remainingElementIds,
+			});
+			// Update bounds since elements were removed
+			set(updateGroupBoundsAtom, group.id);
+		}
+	}
+
+	// Ungroup groups with fewer than 2 elements
+	if (groupsToDisband.length > 0) {
+		const currentGroupIds = get(groupIdsAtom);
+		const newGroupIds = currentGroupIds.filter(
+			(groupId) => !groupsToDisband.includes(groupId),
+		);
+		set(groupIdsAtom, newGroupIds);
+
+		// Collect remaining elements from disbanded groups for selection
+		const remainingElementsToSelect: string[] = [];
+
+		// Remove the group atoms and collect remaining elements
+		groupsToDisband.forEach((groupId) => {
+			const group = get(groupAtomFamily(groupId));
+			if (group) {
+				// Add remaining elements (those that weren't deleted) to selection
+				const remainingElements = group.elementIds.filter(
+					(elementId) => !allIdsToDelete.includes(elementId),
+				);
+				remainingElementsToSelect.push(...remainingElements);
+			}
+			set(groupAtomFamily(groupId), null);
+		});
+
+		// Update selection: remove disbanded groups and add their remaining elements
+		set(selectionAtom, (prev: string[]) => {
+			const filteredSelection = prev.filter(
+				(id) => !groupsToDisband.includes(id),
+			);
+			// Only add remaining elements if any of the disbanded groups were selected
+			const shouldSelectRemainingElements = prev.some((id) =>
+				groupsToDisband.includes(id),
+			);
+			return shouldSelectRemainingElements
+				? [...filteredSelection, ...remainingElementsToSelect]
+				: filteredSelection;
+		});
+	}
 });
 
 // Reorder elements atom
@@ -377,6 +500,14 @@ export const toggleElementVisibilityAtom = atom(
 			...element,
 			visible: !element.visible,
 		});
+
+		// Update group bounds and check if group should be disbanded
+		const elementIdToGroupMap = get(elementIdToGroupMapAtom);
+		const group = elementIdToGroupMap.get(id);
+		if (group) {
+			updateElementGroupBounds(get, set, id);
+			checkAndCleanupGroup(get, set, group.id);
+		}
 	},
 );
 
@@ -395,5 +526,13 @@ export const setElementVisibilityAtom = atom(
 			...element,
 			visible,
 		});
+
+		// Update group bounds and check if group should be disbanded
+		const elementIdToGroupMap = get(elementIdToGroupMapAtom);
+		const group = elementIdToGroupMap.get(id);
+		if (group) {
+			updateElementGroupBounds(get, set, id);
+			checkAndCleanupGroup(get, set, group.id);
+		}
 	},
 );
