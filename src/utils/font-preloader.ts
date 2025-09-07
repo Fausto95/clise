@@ -1,5 +1,5 @@
 import { fontManager } from "./font-manager";
-import { GOOGLE_FONTS } from "./font-manager";
+import { LOCAL_FONTS } from "./font-manager";
 
 /**
  * Font preloader utility for delayed font loading after app launch
@@ -43,7 +43,7 @@ class FontPreloader {
 
 	// Preload the most popular fonts first
 	private async preloadPopularFonts(): Promise<void> {
-		const popularFonts = GOOGLE_FONTS.slice(0, 5); // Top 5 most popular
+		const popularFonts = LOCAL_FONTS.slice(0, 5); // Top 5 most popular
 
 		console.log("Starting font preloading for popular fonts...");
 
@@ -62,7 +62,7 @@ class FontPreloader {
 
 	// Preload remaining fonts in background
 	private async preloadRemainingFonts(): Promise<void> {
-		const remainingFonts = GOOGLE_FONTS.slice(5); // Rest of the fonts
+		const remainingFonts = LOCAL_FONTS.slice(5); // Rest of the fonts
 
 		// Process fonts in batches to avoid overwhelming the browser
 		const batchSize = 2; // Reduced batch size for better performance
@@ -97,7 +97,7 @@ class FontPreloader {
 			return this.preloadPromises.get(fontFamily);
 		}
 
-		const fontConfig = GOOGLE_FONTS.find((font) => font.family === fontFamily);
+		const fontConfig = LOCAL_FONTS.find((font) => font.family === fontFamily);
 		if (!fontConfig) {
 			return;
 		}

@@ -6,7 +6,7 @@ import {
 	removeElementFontAssociationAction,
 } from "../store/font-atoms";
 import { useElementOperations } from "../store/element-hooks";
-import { useFontConfig } from "../store/font-hooks";
+import { useAllFonts } from "../store/font-hooks";
 import type { TextElement } from "../store/elements/element-types";
 
 /**
@@ -19,6 +19,7 @@ export const useFontApplication = () => {
 		removeElementFontAssociationAction,
 	);
 	const { updateElement } = useElementOperations();
+	const allFonts = useAllFonts();
 
 	// Apply font to a text element
 	const applyFontToElement = useCallback(
@@ -29,14 +30,18 @@ export const useFontApplication = () => {
 		): Promise<void> => {
 			try {
 				// Get font configuration
-				const fontConfig = useFontConfig(fontFamily);
+				const fontConfig = allFonts.find((font) => font.family === fontFamily);
 				if (!fontConfig) {
 					console.warn(`Font configuration not found for: ${fontFamily}`);
 					return;
 				}
 
 				// Load the font if it's a web font
-				if (fontConfig.isWebFont || fontConfig.isGoogleFont) {
+				if (
+					fontConfig.isWebFont ||
+					fontConfig.isGoogleFont ||
+					fontConfig.isLocalFont
+				) {
 					await loadFont({ fontConfig, elementId });
 				}
 
@@ -51,7 +56,7 @@ export const useFontApplication = () => {
 				console.error("Failed to apply font to element:", error);
 			}
 		},
-		[loadFont, associateElementWithFont, updateElement],
+		[loadFont, associateElementWithFont, updateElement, allFonts],
 	);
 
 	// Remove font association from element
@@ -97,7 +102,7 @@ export const useFontApplication = () => {
 
 			// Load each unique font
 			const promises = Array.from(fontFamilies).map(async (fontFamily) => {
-				const fontConfig = useFontConfig(fontFamily);
+				const fontConfig = allFonts.find((font) => font.family === fontFamily);
 				if (fontConfig && (fontConfig.isWebFont || fontConfig.isGoogleFont)) {
 					try {
 						await loadFont({ fontConfig });
@@ -109,7 +114,7 @@ export const useFontApplication = () => {
 
 			await Promise.allSettled(promises);
 		},
-		[loadFont],
+		[loadFont, allFonts],
 	);
 
 	// Restore fonts for elements on page load

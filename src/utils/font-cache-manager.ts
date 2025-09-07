@@ -133,6 +133,10 @@ class FontCacheManager {
 				request.onsuccess = () => {
 					const entries = request.result;
 					for (const entry of entries) {
+						// Convert elementIds array back to Set if it was serialized as array
+						if (Array.isArray(entry.elementIds)) {
+							entry.elementIds = new Set(entry.elementIds);
+						}
 						this.cache.set(entry.fontFamily, entry);
 					}
 					resolve();

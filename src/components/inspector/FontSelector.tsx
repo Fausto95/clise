@@ -46,9 +46,9 @@ export function FontSelector({
 				opacity: disabled ? 0.6 : 1,
 			}}
 		>
-			{allFonts.map((font) => (
+			{allFonts.map((font, index) => (
 				<option
-					key={font.family}
+					key={`${font.name}-${index}`}
 					value={font.family}
 					style={{ fontFamily: font.family }}
 				>

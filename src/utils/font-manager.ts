@@ -4,6 +4,15 @@ import type {
 	CanvasKitTypeface,
 } from "../types/canvaskit";
 import { fontCacheManager } from "./font-cache-manager";
+import { generateLocalFontConfigs } from "./local-font-config";
+
+// Font variant data interface
+export interface FontVariantData {
+	weight: number;
+	style: "normal" | "italic";
+	fileName: string;
+	path: string;
+}
 
 // Font configuration interface
 export interface FontConfig {
@@ -12,10 +21,13 @@ export interface FontConfig {
 	weight?: number;
 	style?: "normal" | "italic";
 	url?: string;
+	localPath?: string;
 	isWebFont?: boolean;
 	isGoogleFont?: boolean;
-	source?: "system" | "google" | "custom";
+	isLocalFont?: boolean;
+	source?: "system" | "google" | "custom" | "local";
 	variants?: string[];
+	variantsData?: Map<string, FontVariantData>;
 }
 
 // Font loading state
@@ -30,138 +42,18 @@ export interface FontLoadingInfo {
 export const DEFAULT_FONT: FontConfig = {
 	name: "Inter",
 	family: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
-	source: "google",
-	isGoogleFont: true,
+	source: "local",
+	isLocalFont: true,
+	isWebFont: true,
 	variants: ["400"],
-	url: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2",
+	localPath: "/src/assets/fonts/inter-1.woff2",
 };
 
-// Most popular Google Fonts used in design tools (Figma, Canva, Adobe, etc.)
-export const GOOGLE_FONTS: FontConfig[] = [
-	// Sans-serif fonts (most popular in design tools)
-	{
-		name: "Inter",
-		family: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2",
-	},
-	{
-		name: "Roboto",
-		family: "Roboto, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2",
-	},
-	{
-		name: "Open Sans",
-		family: "Open Sans, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.woff2",
-	},
-	{
-		name: "Montserrat",
-		family: "Montserrat, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2",
-	},
-	{
-		name: "Poppins",
-		family: "Poppins, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2",
-	},
-	{
-		name: "Lato",
-		family: "Lato, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/lato/v23/S6uyw4BMUTPHjx4wXiWtFCc.woff2",
-	},
-	{
-		name: "Nunito",
-		family: "Nunito, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/nunito/v25/XRXV3I6Li01BKofINeaE.woff2",
-	},
-	{
-		name: "Source Sans Pro",
-		family: "Source Sans Pro, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2",
-	},
-	{
-		name: "Work Sans",
-		family: "Work Sans, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/worksans/v19/QGY_z_wNahGAdqQ43RhVcIgYT2Xz5u32K0vWBi8Jow.woff2",
-	},
-	{
-		name: "DM Sans",
-		family: "DM Sans, -apple-system, BlinkMacSystemFont, sans-serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/dmsans/v14/rP2Hp2ywxg089UriCZOIHQ.woff2",
-	},
-	// Serif fonts (popular for headings and display text)
-	{
-		name: "Playfair Display",
-		family: "Playfair Display, -apple-system, BlinkMacSystemFont, serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtXK-F2qO0isEw.woff2",
-	},
-	{
-		name: "Merriweather",
-		family: "Merriweather, -apple-system, BlinkMacSystemFont, serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/merriweather/v30/u-440qyriQwlOrhSvowK_l5-fCZMdeX3rsHo.woff2",
-	},
-	{
-		name: "Lora",
-		family: "Lora, -apple-system, BlinkMacSystemFont, serif",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/lora/v32/0QI6MX1D_JOuGQbT0gvTJPa787weuxJBkqg.woff2",
-	},
-	// Monospace fonts (for code and technical content)
-	{
-		name: "Source Code Pro",
-		family: "Source Code Pro, -apple-system, BlinkMacSystemFont, monospace",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/sourcecodepro/v23/HI_SiYsKILxRpg3hIP6sJ7fM7PqlPevWnsUnxg.woff2",
-	},
-	{
-		name: "Fira Code",
-		family: "Fira Code, -apple-system, BlinkMacSystemFont, monospace",
-		isGoogleFont: true,
-		source: "google",
-		variants: ["400"],
-		url: "https://fonts.gstatic.com/s/firacode/v22/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sJV37MOzlojw8Q.woff2",
-	},
-];
+// Local fonts available in the application
+export const LOCAL_FONTS: FontConfig[] = generateLocalFontConfigs();
+
+// Legacy alias for backward compatibility
+export const GOOGLE_FONTS: FontConfig[] = LOCAL_FONTS;
 
 class FontManager {
 	private canvasKit: CanvasKitInstance | null = null;
@@ -206,7 +98,7 @@ class FontManager {
 
 	// Get all available fonts
 	getAllFonts(): FontConfig[] {
-		return [DEFAULT_FONT, ...GOOGLE_FONTS];
+		return [DEFAULT_FONT, ...LOCAL_FONTS];
 	}
 
 	// Get font loading state
@@ -237,9 +129,9 @@ class FontManager {
 		);
 	}
 
-	// Load a web font (Google Font or custom)
+	// Load a web font (local, Google Font, or custom)
 	async loadWebFont(fontConfig: FontConfig, elementId?: string): Promise<void> {
-		if (!fontConfig.url || this.loadedWebFonts.has(fontConfig.family)) {
+		if (this.loadedWebFonts.has(fontConfig.family)) {
 			return;
 		}
 
@@ -268,7 +160,7 @@ class FontManager {
 				return;
 			} catch (error) {
 				console.warn(
-					"Failed to load cached font, falling back to network:",
+					"Failed to load cached font, falling back to source:",
 					error,
 				);
 			}
@@ -279,7 +171,7 @@ class FontManager {
 			state: "loading",
 		});
 
-		const loadPromise = this.loadFontFromUrl(fontConfig, elementId);
+		const loadPromise = this.loadFontFromSource(fontConfig, elementId);
 		this.fontLoadPromises.set(fontConfig.family, loadPromise);
 
 		try {
@@ -301,17 +193,46 @@ class FontManager {
 		}
 	}
 
-	// Load font from URL
-	private async loadFontFromUrl(
+	// Load font from source (local, Google Font, or custom)
+	private async loadFontFromSource(
 		fontConfig: FontConfig,
 		elementId?: string,
 	): Promise<void> {
-		if (fontConfig.isGoogleFont && fontConfig.url) {
+		if (fontConfig.isLocalFont && fontConfig.localPath) {
+			// Load local font file
+			await this.loadLocalFontFile(fontConfig, elementId);
+		} else if (fontConfig.isGoogleFont && fontConfig.url) {
 			// Load Google Font file directly
 			await this.loadGoogleFontFile(fontConfig, elementId);
 		} else if (fontConfig.url) {
 			// Load custom font file
 			await this.loadCustomFont(fontConfig, elementId);
+		}
+	}
+
+	// Load local font file and create CanvasKit typeface
+	private async loadLocalFontFile(
+		fontConfig: FontConfig,
+		elementId?: string,
+	): Promise<void> {
+		if (!fontConfig.localPath) {
+			throw new Error("Local font path is required");
+		}
+
+		try {
+			// Import the font file as a module to get the URL
+			const fontModule = await import(fontConfig.localPath);
+			const fontUrl = fontModule.default || fontModule;
+
+			const response = await fetch(fontUrl);
+			if (!response.ok) {
+				throw new Error(`Failed to fetch local font: ${response.statusText}`);
+			}
+
+			const fontData = await response.arrayBuffer();
+			await this.loadFontFromBuffer(fontConfig.family, fontData, elementId);
+		} catch (error) {
+			throw new Error(`Failed to load local font: ${error}`);
 		}
 	}
 
@@ -432,15 +353,15 @@ class FontManager {
 				return new canvasKit.Font(null, fontSize);
 			}
 
-			// For Google fonts that haven't loaded yet, trigger loading and use fallback
-			const googleFont = GOOGLE_FONTS.find(
+			// For local fonts that haven't loaded yet, trigger loading and use fallback
+			const localFont = LOCAL_FONTS.find(
 				(font) =>
 					font.family === primaryFontName || font.name === primaryFontName,
 			);
 
-			if (googleFont) {
+			if (localFont) {
 				// Trigger async loading (don't wait)
-				this.loadWebFont(googleFont).catch(console.error);
+				this.loadWebFont(localFont).catch(console.error);
 				// Use fallback font for now
 				return new canvasKit.Font(null, fontSize);
 			}

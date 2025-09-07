@@ -59,7 +59,11 @@ export const loadFontAction = atom(
 		set,
 		{ fontConfig, elementId }: { fontConfig: FontConfig; elementId?: string },
 	) => {
-		if (!fontConfig.isWebFont && !fontConfig.isGoogleFont) {
+		if (
+			!fontConfig.isWebFont &&
+			!fontConfig.isGoogleFont &&
+			!fontConfig.isLocalFont
+		) {
 			return; // System fonts don't need loading
 		}
 
