@@ -5,7 +5,12 @@ import type {
 } from "../types/canvaskit";
 import { fontCacheManager } from "./font-cache-manager";
 import { generateLocalFontConfigs } from "./local-font-config";
-import interFont from "../assets/fonts/inter-1.woff2";
+import inter300 from "../assets/fonts/inter-1.woff2";
+import inter400 from "../assets/fonts/inter-2.woff2";
+import inter500 from "../assets/fonts/inter-3.woff2";
+import inter600 from "../assets/fonts/inter-4.woff2";
+import inter700 from "../assets/fonts/inter-5.woff2";
+import inter800 from "../assets/fonts/inter-6.woff2";
 
 // Font variant data interface
 export interface FontVariantData {
@@ -46,8 +51,64 @@ export const DEFAULT_FONT: FontConfig = {
 	source: "local",
 	isLocalFont: true,
 	isWebFont: true,
-	variants: ["400"],
-	localPath: interFont,
+	variants: ["300", "400", "500", "600", "700", "800"],
+	variantsData: new Map([
+		[
+			"300",
+			{
+				weight: 300,
+				style: "normal",
+				fileName: "inter-1.woff2",
+				path: inter300,
+			},
+		],
+		[
+			"400",
+			{
+				weight: 400,
+				style: "normal",
+				fileName: "inter-2.woff2",
+				path: inter400,
+			},
+		],
+		[
+			"500",
+			{
+				weight: 500,
+				style: "normal",
+				fileName: "inter-3.woff2",
+				path: inter500,
+			},
+		],
+		[
+			"600",
+			{
+				weight: 600,
+				style: "normal",
+				fileName: "inter-4.woff2",
+				path: inter600,
+			},
+		],
+		[
+			"700",
+			{
+				weight: 700,
+				style: "normal",
+				fileName: "inter-5.woff2",
+				path: inter700,
+			},
+		],
+		[
+			"800",
+			{
+				weight: 800,
+				style: "normal",
+				fileName: "inter-6.woff2",
+				path: inter800,
+			},
+		],
+	]),
+	localPath: inter400,
 };
 
 // Local fonts available in the application
@@ -222,6 +283,9 @@ class FontManager {
 
 		try {
 			// localPath is now a URL string from Vite asset imports
+			console.log(
+				`Loading local font: ${fontConfig.family} from ${fontConfig.localPath}`,
+			);
 			const response = await fetch(fontConfig.localPath);
 			if (!response.ok) {
 				throw new Error(`Failed to fetch local font: ${response.statusText}`);
@@ -230,6 +294,7 @@ class FontManager {
 			const fontData = await response.arrayBuffer();
 			await this.loadFontFromBuffer(fontConfig.family, fontData, elementId);
 		} catch (error) {
+			console.error(`Failed to load local font ${fontConfig.family}:`, error);
 			throw new Error(`Failed to load local font: ${error}`);
 		}
 	}
@@ -313,7 +378,11 @@ class FontManager {
 	}
 
 	// Create CanvasKit font with proper typeface
-	createFont(fontFamily: string, fontSize: number): CanvasKitFont {
+	createFont(
+		fontFamily: string,
+		fontSize: number,
+		fontWeight?: string,
+	): CanvasKitFont {
 		if (!this.canvasKit) {
 			throw new Error("CanvasKit not initialized");
 		}
@@ -324,14 +393,31 @@ class FontManager {
 
 		const canvasKit = this.canvasKit;
 
+		// Log font weight for debugging
+		if (fontWeight && fontWeight !== "400" && fontWeight !== "normal") {
+			console.log(
+				`Creating font with weight: ${fontWeight} for family: ${fontFamily}`,
+			);
+		}
+
 		// Extract the primary font name from font family string (e.g., "Inter" from "Inter, sans-serif")
 		const fontParts = fontFamily.split(",");
 		const primaryFontName = (fontParts[0] || fontFamily)
 			.trim()
 			.replace(/["']/g, "");
 
-		// Try to get typeface using the primary font name
-		let typeface = this.getTypeface(primaryFontName);
+		// Try to get typeface using the primary font name with weight
+		let typefaceKey = primaryFontName;
+		if (fontWeight && fontWeight !== "400" && fontWeight !== "normal") {
+			typefaceKey = `${primaryFontName}-${fontWeight}`;
+		}
+
+		let typeface = this.getTypeface(typefaceKey);
+
+		// If not found, try with the primary font name without weight
+		if (!typeface) {
+			typeface = this.getTypeface(primaryFontName);
+		}
 
 		// If not found, try with the full font family string
 		if (!typeface) {
@@ -354,14 +440,40 @@ class FontManager {
 			// For local fonts that haven't loaded yet, trigger loading and use fallback
 			const localFont = LOCAL_FONTS.find(
 				(font) =>
-					font.family === primaryFontName || font.name === primaryFontName,
+					font.family === fontFamily ||
+					font.name === primaryFontName ||
+					font.family.includes(primaryFontName),
 			);
 
 			if (localFont) {
-				// Trigger async loading (don't wait)
-				this.loadWebFont(localFont).catch(console.error);
-				// Use fallback font for now
-				return new canvasKit.Font(null, fontSize);
+				// Check if we need to load a specific weight variant
+				if (
+					fontWeight &&
+					fontWeight !== "400" &&
+					fontWeight !== "normal" &&
+					localFont.variantsData
+				) {
+					const variant = localFont.variantsData.get(fontWeight);
+					if (variant) {
+						// Create a temporary font config for this specific weight
+						const weightFontConfig: FontConfig = {
+							...localFont,
+							localPath: variant.path,
+							name: `${localFont.name}-${fontWeight}`,
+							family: `${localFont.family}-${fontWeight}`,
+						};
+						// Trigger async loading of the specific weight (don't wait)
+						this.loadWebFont(weightFontConfig).catch(console.error);
+					}
+				} else {
+					// Trigger async loading of the default font (don't wait)
+					this.loadWebFont(localFont).catch(console.error);
+				}
+
+				// Use Inter font as fallback instead of null to prevent text disappearing
+				console.log(`Font ${fontFamily} not loaded yet, using Inter fallback`);
+				const interTypeface = this.getTypeface("Inter");
+				return new canvasKit.Font(interTypeface || null, fontSize);
 			}
 		}
 

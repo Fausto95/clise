@@ -182,7 +182,18 @@ export interface TextElement extends BaseElement {
 	fontSize: number;
 	fontFamily: string;
 	textDecoration?: "none" | "underline" | "line-through";
-	fontWeight?: "normal" | "bold";
+	fontWeight?:
+		| "100"
+		| "200"
+		| "300"
+		| "400"
+		| "500"
+		| "600"
+		| "700"
+		| "800"
+		| "900"
+		| "normal"
+		| "bold";
 	textTransform?: "none" | "uppercase" | "lowercase" | "capitalize";
 	lineHeight?: number;
 	letterSpacing?: number;

@@ -2,1314 +2,290 @@
 	"fonts": [
 		{
 			"family": "Inter",
-			"weight": "unknown",
+			"weight": "300",
 			"style": "normal",
 			"fileName": "inter-1.woff2",
 			"path": "./fonts/inter-1.woff2"
 		},
 		{
 			"family": "Inter",
-			"weight": "unknown",
+			"weight": "400",
 			"style": "normal",
 			"fileName": "inter-2.woff2",
 			"path": "./fonts/inter-2.woff2"
 		},
 		{
 			"family": "Inter",
-			"weight": "unknown",
+			"weight": "500",
 			"style": "normal",
 			"fileName": "inter-3.woff2",
 			"path": "./fonts/inter-3.woff2"
 		},
 		{
 			"family": "Inter",
-			"weight": "unknown",
+			"weight": "600",
 			"style": "normal",
 			"fileName": "inter-4.woff2",
 			"path": "./fonts/inter-4.woff2"
 		},
 		{
 			"family": "Inter",
-			"weight": "unknown",
+			"weight": "700",
 			"style": "normal",
 			"fileName": "inter-5.woff2",
 			"path": "./fonts/inter-5.woff2"
 		},
 		{
 			"family": "Inter",
-			"weight": "unknown",
+			"weight": "800",
 			"style": "normal",
 			"fileName": "inter-6.woff2",
 			"path": "./fonts/inter-6.woff2"
 		},
 		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-7.woff2",
-			"path": "./fonts/inter-7.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-8.woff2",
-			"path": "./fonts/inter-8.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-9.woff2",
-			"path": "./fonts/inter-9.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-10.woff2",
-			"path": "./fonts/inter-10.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-11.woff2",
-			"path": "./fonts/inter-11.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-12.woff2",
-			"path": "./fonts/inter-12.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-13.woff2",
-			"path": "./fonts/inter-13.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-14.woff2",
-			"path": "./fonts/inter-14.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-15.woff2",
-			"path": "./fonts/inter-15.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-16.woff2",
-			"path": "./fonts/inter-16.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-17.woff2",
-			"path": "./fonts/inter-17.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-18.woff2",
-			"path": "./fonts/inter-18.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-19.woff2",
-			"path": "./fonts/inter-19.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-20.woff2",
-			"path": "./fonts/inter-20.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-21.woff2",
-			"path": "./fonts/inter-21.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-22.woff2",
-			"path": "./fonts/inter-22.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-23.woff2",
-			"path": "./fonts/inter-23.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-24.woff2",
-			"path": "./fonts/inter-24.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-25.woff2",
-			"path": "./fonts/inter-25.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-26.woff2",
-			"path": "./fonts/inter-26.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-27.woff2",
-			"path": "./fonts/inter-27.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-28.woff2",
-			"path": "./fonts/inter-28.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-29.woff2",
-			"path": "./fonts/inter-29.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-30.woff2",
-			"path": "./fonts/inter-30.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-31.woff2",
-			"path": "./fonts/inter-31.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-32.woff2",
-			"path": "./fonts/inter-32.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-33.woff2",
-			"path": "./fonts/inter-33.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-34.woff2",
-			"path": "./fonts/inter-34.woff2"
-		},
-		{
-			"family": "Inter",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "inter-35.woff2",
-			"path": "./fonts/inter-35.woff2"
-		},
-		{
 			"family": "Roboto",
-			"weight": "unknown",
+			"weight": "300",
 			"style": "normal",
 			"fileName": "roboto-1.woff2",
 			"path": "./fonts/roboto-1.woff2"
 		},
 		{
 			"family": "Roboto",
-			"weight": "unknown",
+			"weight": "400",
 			"style": "normal",
 			"fileName": "roboto-2.woff2",
 			"path": "./fonts/roboto-2.woff2"
 		},
 		{
 			"family": "Roboto",
-			"weight": "unknown",
+			"weight": "500",
 			"style": "normal",
 			"fileName": "roboto-3.woff2",
 			"path": "./fonts/roboto-3.woff2"
 		},
 		{
 			"family": "Roboto",
-			"weight": "unknown",
+			"weight": "700",
 			"style": "normal",
 			"fileName": "roboto-4.woff2",
 			"path": "./fonts/roboto-4.woff2"
 		},
 		{
 			"family": "Roboto",
-			"weight": "unknown",
+			"weight": "900",
 			"style": "normal",
 			"fileName": "roboto-5.woff2",
 			"path": "./fonts/roboto-5.woff2"
 		},
 		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-6.woff2",
-			"path": "./fonts/roboto-6.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-7.woff2",
-			"path": "./fonts/roboto-7.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-8.woff2",
-			"path": "./fonts/roboto-8.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-9.woff2",
-			"path": "./fonts/roboto-9.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-10.woff2",
-			"path": "./fonts/roboto-10.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-11.woff2",
-			"path": "./fonts/roboto-11.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-12.woff2",
-			"path": "./fonts/roboto-12.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-13.woff2",
-			"path": "./fonts/roboto-13.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-14.woff2",
-			"path": "./fonts/roboto-14.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-15.woff2",
-			"path": "./fonts/roboto-15.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-16.woff2",
-			"path": "./fonts/roboto-16.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-17.woff2",
-			"path": "./fonts/roboto-17.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-18.woff2",
-			"path": "./fonts/roboto-18.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-19.woff2",
-			"path": "./fonts/roboto-19.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-20.woff2",
-			"path": "./fonts/roboto-20.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-21.woff2",
-			"path": "./fonts/roboto-21.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-22.woff2",
-			"path": "./fonts/roboto-22.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-23.woff2",
-			"path": "./fonts/roboto-23.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-24.woff2",
-			"path": "./fonts/roboto-24.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-25.woff2",
-			"path": "./fonts/roboto-25.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-26.woff2",
-			"path": "./fonts/roboto-26.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-27.woff2",
-			"path": "./fonts/roboto-27.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-28.woff2",
-			"path": "./fonts/roboto-28.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-29.woff2",
-			"path": "./fonts/roboto-29.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-30.woff2",
-			"path": "./fonts/roboto-30.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-31.woff2",
-			"path": "./fonts/roboto-31.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-32.woff2",
-			"path": "./fonts/roboto-32.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-33.woff2",
-			"path": "./fonts/roboto-33.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-34.woff2",
-			"path": "./fonts/roboto-34.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-35.woff2",
-			"path": "./fonts/roboto-35.woff2"
-		},
-		{
-			"family": "Roboto",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "roboto-36.woff2",
-			"path": "./fonts/roboto-36.woff2"
-		},
-		{
 			"family": "Open Sans",
-			"weight": "unknown",
+			"weight": "300",
 			"style": "normal",
 			"fileName": "open-sans-1.woff2",
 			"path": "./fonts/open-sans-1.woff2"
 		},
 		{
 			"family": "Open Sans",
-			"weight": "unknown",
+			"weight": "400",
 			"style": "normal",
 			"fileName": "open-sans-2.woff2",
 			"path": "./fonts/open-sans-2.woff2"
 		},
 		{
 			"family": "Open Sans",
-			"weight": "unknown",
+			"weight": "600",
 			"style": "normal",
 			"fileName": "open-sans-3.woff2",
 			"path": "./fonts/open-sans-3.woff2"
 		},
 		{
 			"family": "Open Sans",
-			"weight": "unknown",
+			"weight": "700",
 			"style": "normal",
 			"fileName": "open-sans-4.woff2",
 			"path": "./fonts/open-sans-4.woff2"
 		},
 		{
 			"family": "Open Sans",
-			"weight": "unknown",
+			"weight": "800",
 			"style": "normal",
 			"fileName": "open-sans-5.woff2",
 			"path": "./fonts/open-sans-5.woff2"
 		},
 		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-6.woff2",
-			"path": "./fonts/open-sans-6.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-7.woff2",
-			"path": "./fonts/open-sans-7.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-8.woff2",
-			"path": "./fonts/open-sans-8.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-9.woff2",
-			"path": "./fonts/open-sans-9.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-10.woff2",
-			"path": "./fonts/open-sans-10.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-11.woff2",
-			"path": "./fonts/open-sans-11.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-12.woff2",
-			"path": "./fonts/open-sans-12.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-13.woff2",
-			"path": "./fonts/open-sans-13.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-14.woff2",
-			"path": "./fonts/open-sans-14.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-15.woff2",
-			"path": "./fonts/open-sans-15.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-16.woff2",
-			"path": "./fonts/open-sans-16.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-17.woff2",
-			"path": "./fonts/open-sans-17.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-18.woff2",
-			"path": "./fonts/open-sans-18.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-19.woff2",
-			"path": "./fonts/open-sans-19.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-20.woff2",
-			"path": "./fonts/open-sans-20.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-21.woff2",
-			"path": "./fonts/open-sans-21.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-22.woff2",
-			"path": "./fonts/open-sans-22.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-23.woff2",
-			"path": "./fonts/open-sans-23.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-24.woff2",
-			"path": "./fonts/open-sans-24.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-25.woff2",
-			"path": "./fonts/open-sans-25.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-26.woff2",
-			"path": "./fonts/open-sans-26.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-27.woff2",
-			"path": "./fonts/open-sans-27.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-28.woff2",
-			"path": "./fonts/open-sans-28.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-29.woff2",
-			"path": "./fonts/open-sans-29.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-30.woff2",
-			"path": "./fonts/open-sans-30.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-31.woff2",
-			"path": "./fonts/open-sans-31.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-32.woff2",
-			"path": "./fonts/open-sans-32.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-33.woff2",
-			"path": "./fonts/open-sans-33.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-34.woff2",
-			"path": "./fonts/open-sans-34.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-35.woff2",
-			"path": "./fonts/open-sans-35.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-36.woff2",
-			"path": "./fonts/open-sans-36.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-37.woff2",
-			"path": "./fonts/open-sans-37.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-38.woff2",
-			"path": "./fonts/open-sans-38.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-39.woff2",
-			"path": "./fonts/open-sans-39.woff2"
-		},
-		{
-			"family": "Open Sans",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "open-sans-40.woff2",
-			"path": "./fonts/open-sans-40.woff2"
-		},
-		{
-			"family": "Lato",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "lato-1.woff2",
-			"path": "./fonts/lato-1.woff2"
-		},
-		{
-			"family": "Lato",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "lato-2.woff2",
-			"path": "./fonts/lato-2.woff2"
-		},
-		{
-			"family": "Lato",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "lato-3.woff2",
-			"path": "./fonts/lato-3.woff2"
-		},
-		{
-			"family": "Lato",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "lato-4.woff2",
-			"path": "./fonts/lato-4.woff2"
-		},
-		{
-			"family": "Lato",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "lato-5.woff2",
-			"path": "./fonts/lato-5.woff2"
-		},
-		{
-			"family": "Lato",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "lato-6.woff2",
-			"path": "./fonts/lato-6.woff2"
-		},
-		{
 			"family": "Montserrat",
-			"weight": "unknown",
+			"weight": "300",
 			"style": "normal",
 			"fileName": "montserrat-1.woff2",
 			"path": "./fonts/montserrat-1.woff2"
 		},
 		{
 			"family": "Montserrat",
-			"weight": "unknown",
+			"weight": "400",
 			"style": "normal",
 			"fileName": "montserrat-2.woff2",
 			"path": "./fonts/montserrat-2.woff2"
 		},
 		{
 			"family": "Montserrat",
-			"weight": "unknown",
+			"weight": "500",
 			"style": "normal",
 			"fileName": "montserrat-3.woff2",
 			"path": "./fonts/montserrat-3.woff2"
 		},
 		{
 			"family": "Montserrat",
-			"weight": "unknown",
+			"weight": "600",
 			"style": "normal",
 			"fileName": "montserrat-4.woff2",
 			"path": "./fonts/montserrat-4.woff2"
 		},
 		{
 			"family": "Montserrat",
-			"weight": "unknown",
+			"weight": "700",
 			"style": "normal",
 			"fileName": "montserrat-5.woff2",
 			"path": "./fonts/montserrat-5.woff2"
 		},
 		{
 			"family": "Montserrat",
-			"weight": "unknown",
+			"weight": "800",
 			"style": "normal",
 			"fileName": "montserrat-6.woff2",
 			"path": "./fonts/montserrat-6.woff2"
 		},
 		{
 			"family": "Montserrat",
-			"weight": "unknown",
+			"weight": "900",
 			"style": "normal",
 			"fileName": "montserrat-7.woff2",
 			"path": "./fonts/montserrat-7.woff2"
 		},
 		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-8.woff2",
-			"path": "./fonts/montserrat-8.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-9.woff2",
-			"path": "./fonts/montserrat-9.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-10.woff2",
-			"path": "./fonts/montserrat-10.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-11.woff2",
-			"path": "./fonts/montserrat-11.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-12.woff2",
-			"path": "./fonts/montserrat-12.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-13.woff2",
-			"path": "./fonts/montserrat-13.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-14.woff2",
-			"path": "./fonts/montserrat-14.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-15.woff2",
-			"path": "./fonts/montserrat-15.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-16.woff2",
-			"path": "./fonts/montserrat-16.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-17.woff2",
-			"path": "./fonts/montserrat-17.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-18.woff2",
-			"path": "./fonts/montserrat-18.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-19.woff2",
-			"path": "./fonts/montserrat-19.woff2"
-		},
-		{
-			"family": "Montserrat",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "montserrat-20.woff2",
-			"path": "./fonts/montserrat-20.woff2"
-		},
-		{
 			"family": "Poppins",
-			"weight": "unknown",
+			"weight": "300",
 			"style": "normal",
 			"fileName": "poppins-1.woff2",
 			"path": "./fonts/poppins-1.woff2"
 		},
 		{
 			"family": "Poppins",
-			"weight": "unknown",
+			"weight": "400",
 			"style": "normal",
 			"fileName": "poppins-2.woff2",
 			"path": "./fonts/poppins-2.woff2"
 		},
 		{
 			"family": "Poppins",
-			"weight": "unknown",
+			"weight": "500",
 			"style": "normal",
 			"fileName": "poppins-3.woff2",
 			"path": "./fonts/poppins-3.woff2"
 		},
 		{
 			"family": "Poppins",
-			"weight": "unknown",
+			"weight": "600",
 			"style": "normal",
 			"fileName": "poppins-4.woff2",
 			"path": "./fonts/poppins-4.woff2"
 		},
 		{
 			"family": "Poppins",
-			"weight": "unknown",
+			"weight": "700",
 			"style": "normal",
 			"fileName": "poppins-5.woff2",
 			"path": "./fonts/poppins-5.woff2"
 		},
 		{
 			"family": "Poppins",
-			"weight": "unknown",
+			"weight": "800",
 			"style": "normal",
 			"fileName": "poppins-6.woff2",
 			"path": "./fonts/poppins-6.woff2"
 		},
 		{
 			"family": "Poppins",
-			"weight": "unknown",
+			"weight": "900",
 			"style": "normal",
 			"fileName": "poppins-7.woff2",
 			"path": "./fonts/poppins-7.woff2"
 		},
 		{
-			"family": "Poppins",
-			"weight": "unknown",
+			"family": "Lato",
+			"weight": "300",
 			"style": "normal",
-			"fileName": "poppins-8.woff2",
-			"path": "./fonts/poppins-8.woff2"
+			"fileName": "lato-1.woff2",
+			"path": "./fonts/lato-1.woff2"
 		},
 		{
-			"family": "Poppins",
-			"weight": "unknown",
+			"family": "Lato",
+			"weight": "400",
 			"style": "normal",
-			"fileName": "poppins-9.woff2",
-			"path": "./fonts/poppins-9.woff2"
+			"fileName": "lato-2.woff2",
+			"path": "./fonts/lato-2.woff2"
 		},
 		{
-			"family": "Poppins",
-			"weight": "unknown",
+			"family": "Lato",
+			"weight": "700",
 			"style": "normal",
-			"fileName": "poppins-10.woff2",
-			"path": "./fonts/poppins-10.woff2"
+			"fileName": "lato-3.woff2",
+			"path": "./fonts/lato-3.woff2"
 		},
 		{
-			"family": "Poppins",
-			"weight": "unknown",
+			"family": "Lato",
+			"weight": "900",
 			"style": "normal",
-			"fileName": "poppins-11.woff2",
-			"path": "./fonts/poppins-11.woff2"
-		},
-		{
-			"family": "Poppins",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "poppins-12.woff2",
-			"path": "./fonts/poppins-12.woff2"
-		},
-		{
-			"family": "Poppins",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "poppins-13.woff2",
-			"path": "./fonts/poppins-13.woff2"
-		},
-		{
-			"family": "Poppins",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "poppins-14.woff2",
-			"path": "./fonts/poppins-14.woff2"
-		},
-		{
-			"family": "Poppins",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "poppins-15.woff2",
-			"path": "./fonts/poppins-15.woff2"
+			"fileName": "lato-4.woff2",
+			"path": "./fonts/lato-4.woff2"
 		},
 		{
 			"family": "Source Code Pro",
-			"weight": "unknown",
+			"weight": "300",
 			"style": "normal",
-			"fileName": "source-code-pro-1.woff2",
-			"path": "./fonts/source-code-pro-1.woff2"
+			"fileName": "source-code pro-1.woff2",
+			"path": "./fonts/source-code pro-1.woff2"
 		},
 		{
 			"family": "Source Code Pro",
-			"weight": "unknown",
+			"weight": "400",
 			"style": "normal",
-			"fileName": "source-code-pro-2.woff2",
-			"path": "./fonts/source-code-pro-2.woff2"
+			"fileName": "source-code pro-2.woff2",
+			"path": "./fonts/source-code pro-2.woff2"
 		},
 		{
 			"family": "Source Code Pro",
-			"weight": "unknown",
+			"weight": "500",
 			"style": "normal",
-			"fileName": "source-code-pro-3.woff2",
-			"path": "./fonts/source-code-pro-3.woff2"
+			"fileName": "source-code pro-3.woff2",
+			"path": "./fonts/source-code pro-3.woff2"
 		},
 		{
 			"family": "Source Code Pro",
-			"weight": "unknown",
+			"weight": "600",
 			"style": "normal",
-			"fileName": "source-code-pro-4.woff2",
-			"path": "./fonts/source-code-pro-4.woff2"
+			"fileName": "source-code pro-4.woff2",
+			"path": "./fonts/source-code pro-4.woff2"
 		},
 		{
 			"family": "Source Code Pro",
-			"weight": "unknown",
+			"weight": "700",
 			"style": "normal",
-			"fileName": "source-code-pro-5.woff2",
-			"path": "./fonts/source-code-pro-5.woff2"
+			"fileName": "source-code pro-5.woff2",
+			"path": "./fonts/source-code pro-5.woff2"
 		},
 		{
 			"family": "Source Code Pro",
-			"weight": "unknown",
+			"weight": "800",
 			"style": "normal",
-			"fileName": "source-code-pro-6.woff2",
-			"path": "./fonts/source-code-pro-6.woff2"
+			"fileName": "source-code pro-6.woff2",
+			"path": "./fonts/source-code pro-6.woff2"
 		},
 		{
 			"family": "Source Code Pro",
-			"weight": "unknown",
+			"weight": "900",
 			"style": "normal",
-			"fileName": "source-code-pro-7.woff2",
-			"path": "./fonts/source-code-pro-7.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-8.woff2",
-			"path": "./fonts/source-code-pro-8.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-9.woff2",
-			"path": "./fonts/source-code-pro-9.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-10.woff2",
-			"path": "./fonts/source-code-pro-10.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-11.woff2",
-			"path": "./fonts/source-code-pro-11.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-12.woff2",
-			"path": "./fonts/source-code-pro-12.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-13.woff2",
-			"path": "./fonts/source-code-pro-13.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-14.woff2",
-			"path": "./fonts/source-code-pro-14.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-15.woff2",
-			"path": "./fonts/source-code-pro-15.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-16.woff2",
-			"path": "./fonts/source-code-pro-16.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-17.woff2",
-			"path": "./fonts/source-code-pro-17.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-18.woff2",
-			"path": "./fonts/source-code-pro-18.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-19.woff2",
-			"path": "./fonts/source-code-pro-19.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-20.woff2",
-			"path": "./fonts/source-code-pro-20.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-21.woff2",
-			"path": "./fonts/source-code-pro-21.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-22.woff2",
-			"path": "./fonts/source-code-pro-22.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-23.woff2",
-			"path": "./fonts/source-code-pro-23.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-24.woff2",
-			"path": "./fonts/source-code-pro-24.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-25.woff2",
-			"path": "./fonts/source-code-pro-25.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-26.woff2",
-			"path": "./fonts/source-code-pro-26.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-27.woff2",
-			"path": "./fonts/source-code-pro-27.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-28.woff2",
-			"path": "./fonts/source-code-pro-28.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-29.woff2",
-			"path": "./fonts/source-code-pro-29.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-30.woff2",
-			"path": "./fonts/source-code-pro-30.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-31.woff2",
-			"path": "./fonts/source-code-pro-31.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-32.woff2",
-			"path": "./fonts/source-code-pro-32.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-33.woff2",
-			"path": "./fonts/source-code-pro-33.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-34.woff2",
-			"path": "./fonts/source-code-pro-34.woff2"
-		},
-		{
-			"family": "Source Code Pro",
-			"weight": "unknown",
-			"style": "normal",
-			"fileName": "source-code-pro-35.woff2",
-			"path": "./fonts/source-code-pro-35.woff2"
+			"fileName": "source-code pro-7.woff2",
+			"path": "./fonts/source-code pro-7.woff2"
 		}
-	],
-	"generatedAt": "2025-09-05T19:27:24.898Z",
-	"totalFonts": 187
+	]
 }

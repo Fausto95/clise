@@ -445,8 +445,8 @@ export class BatchRenderer {
 
 		const textColor = this.hexToRgba(color, opacity);
 		const paint = this.createFillPaint(textColor);
-		const font = fontManager.createFont(fontFamily, fontSize);
-		const isBold = fontWeight === "bold";
+		const font = fontManager.createFont(fontFamily, fontSize, fontWeight);
+		const isBold = fontWeight === "bold" || fontWeight === "700";
 		const lines = displayText.split("\n");
 		const actualLineHeight = (lineHeight || 1.2) * fontSize;
 
