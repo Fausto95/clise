@@ -13,8 +13,14 @@ export default defineConfig({
 			"@context-menu": "/src/context-menu",
 		},
 	},
-	// Configure WASM support for CanvasKit
-	assetsInclude: ["**/*.wasm"],
+	// Configure WASM support for CanvasKit and font assets
+	assetsInclude: [
+		"**/*.wasm",
+		"**/*.woff2",
+		"**/*.woff",
+		"**/*.ttf",
+		"**/*.otf",
+	],
 	server: {
 		fs: {
 			allow: [".."],
@@ -26,5 +32,22 @@ export default defineConfig({
 	},
 	optimizeDeps: {
 		exclude: ["canvaskit-wasm"],
+	},
+	build: {
+		assetsDir: "assets",
+		rollupOptions: {
+			output: {
+				assetFileNames: (assetInfo) => {
+					// Keep font files with their original names for better caching
+					if (
+						assetInfo.name &&
+						/\.(woff2?|ttf|otf|eot)$/.test(assetInfo.name)
+					) {
+						return `assets/fonts/[name]-[hash][extname]`;
+					}
+					return `assets/[name]-[hash][extname]`;
+				},
+			},
+		},
 	},
 });

@@ -133,6 +133,10 @@ class FontCacheManager {
 				request.onsuccess = () => {
 					const entries = request.result;
 					for (const entry of entries) {
+						// Convert elementIds array back to Set if it was serialized as array
+						if (Array.isArray(entry.elementIds)) {
+							entry.elementIds = new Set(entry.elementIds);
+						}
 						this.cache.set(entry.fontFamily, entry);
 					}
 					resolve();
@@ -221,7 +225,7 @@ class FontCacheManager {
 
 	// Save font to IndexedDB
 	private async saveFontToIndexedDB(
-		_fontFamily: string,
+		fontFamily: string,
 		entry: FontCacheEntry,
 	): Promise<void> {
 		try {
@@ -229,9 +233,10 @@ class FontCacheManager {
 			const transaction = db.transaction(["fonts"], "readwrite");
 			const store = transaction.objectStore("fonts");
 
-			// Convert Set to Array for serialization
+			// Convert Set to Array for serialization and add fontFamily key
 			const serializableEntry = {
 				...entry,
+				fontFamily, // Add the fontFamily key required by IndexedDB keyPath
 				elementIds: Array.from(entry.elementIds),
 			};
 

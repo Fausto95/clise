@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Field } from "./Field";
 import { FontSelector } from "./FontSelector";
+import { FontWeightSelector } from "./FontWeightSelector";
 import { useFontApplication } from "../../hooks/use-font-application";
 import { useFontManager } from "../../store/font-hooks";
 import type { InspectorSectionProps } from "./types";
@@ -103,6 +104,7 @@ export function TypographySection({
 								onChange={handleFontFamilyChange}
 								className="input-field"
 								disabled={currentFontLoadingState === "loading"}
+								elementId={element.id}
 							/>
 							{currentFontLoadingState === "loading" && (
 								<div
@@ -197,28 +199,12 @@ export function TypographySection({
 
 				<div className="typography-button-group">
 					<Field label={t("inspector.fontWeight")}>
-						<div className="align-buttons">
-							<button
-								type="button"
-								className={`align-button ${
-									textElement.fontWeight === "normal" || !textElement.fontWeight
-										? "active"
-										: ""
-								}`}
-								onClick={() => onUpdate(element.id, { fontWeight: "normal" })}
-							>
-								Normal
-							</button>
-							<button
-								type="button"
-								className={`align-button ${
-									textElement.fontWeight === "bold" ? "active" : ""
-								}`}
-								onClick={() => onUpdate(element.id, { fontWeight: "bold" })}
-							>
-								Bold
-							</button>
-						</div>
+						<FontWeightSelector
+							value={textElement.fontWeight || "400"}
+							onChange={(fontWeight) => onUpdate(element.id, { fontWeight })}
+							className="input-field"
+							fontFamily={textElement.fontFamily}
+						/>
 					</Field>
 				</div>
 			</div>

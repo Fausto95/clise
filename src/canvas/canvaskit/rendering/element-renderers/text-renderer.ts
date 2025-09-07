@@ -99,10 +99,10 @@ export class TextRenderer {
 		}
 
 		// Create font with proper typeface from font manager
-		const font = fontManager.createFont(fontFamily, fontSize);
+		const font = fontManager.createFont(fontFamily, fontSize, fontWeight);
 
-		// Simulate bold by drawing the text multiple times with slight offsets
-		const isBold = fontWeight === "bold";
+		// Determine if text should be bold based on font weight
+		const isBold = fontWeight === "bold" || fontWeight === "700";
 
 		// Draw the text at the element's position (only if text exists)
 		if (text) {
