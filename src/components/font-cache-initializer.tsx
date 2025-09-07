@@ -5,6 +5,7 @@ import { useElements } from "../store/element-hooks";
 import { useFontApplication } from "../hooks/use-font-application";
 import { fontCacheCleanup } from "../utils/font-cache-cleanup";
 import { fontPreloader } from "../utils/font-preloader";
+import type { Element, TextElement } from "../store/atoms";
 
 /**
  * Component that initializes the font cache system on app startup
@@ -26,8 +27,8 @@ export const FontCacheInitializer = () => {
 
 				// Restore fonts for existing text elements
 				const textElements = elements.filter(
-					(element: any) => element.type === "text",
-				) as any[];
+					(element: Element) => element.type === "text",
+				) as TextElement[];
 				if (textElements.length > 0) {
 					await restoreFontsForElements(textElements);
 				}
@@ -39,21 +40,9 @@ export const FontCacheInitializer = () => {
 		// Initialize immediately for cache restoration
 		initializeFontSystem();
 
-		// Start delayed font preloading after app launch
-		const startPreloading = async () => {
-			try {
-				await fontPreloader.startDelayedPreloading();
-			} catch (error) {
-				console.warn("Failed to start font preloading:", error);
-			}
-		};
-
-		// Start preloading after a delay to improve startup performance
-		const preloadTimer = setTimeout(startPreloading, 3000); // 3 second delay (increased to let app fully load)
-
 		// Cleanup on unmount
 		return () => {
-			clearTimeout(preloadTimer);
+			// clearTimeout(preloadTimer); // Disabled automatic preloading
 			fontPreloader.stopPreloading();
 			fontCacheCleanup.stopAutomaticCleanup();
 		};

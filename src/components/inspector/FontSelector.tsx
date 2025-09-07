@@ -7,6 +7,7 @@ interface FontSelectorProps {
 	onChange: (fontFamily: string) => void;
 	className?: string;
 	disabled?: boolean;
+	elementId?: string; // Optional element ID for font loading
 }
 
 export function FontSelector({
@@ -14,8 +15,9 @@ export function FontSelector({
 	onChange,
 	className = "",
 	disabled = false,
+	elementId,
 }: FontSelectorProps) {
-	const { allFonts } = useFontManager();
+	const { allFonts, loadFont } = useFontManager();
 
 	// Get current font config
 	const currentFont = useMemo(() => {
@@ -29,9 +31,26 @@ export function FontSelector({
 		);
 	}, [allFonts, value]);
 
-	const handleFontChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+	const handleFontChange = async (
+		event: React.ChangeEvent<HTMLSelectElement>,
+	) => {
 		const fontFamily = event.target.value;
+
+		// Call the onChange callback immediately for UI responsiveness
 		onChange(fontFamily);
+
+		// Load the font if elementId is provided
+		if (elementId) {
+			try {
+				const fontConfig = allFonts.find((font) => font.family === fontFamily);
+				if (fontConfig) {
+					await loadFont({ fontConfig, elementId });
+				}
+			} catch (error) {
+				console.warn(`Failed to load font ${fontFamily}:`, error);
+				// Don't revert the UI change - let the parent component handle errors
+			}
+		}
 	};
 
 	return (

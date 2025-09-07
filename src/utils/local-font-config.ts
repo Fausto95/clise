@@ -1,5 +1,13 @@
 import type { FontConfig } from "./font-manager";
 
+// Import font files as Vite assets
+import robotoFont from "../assets/fonts/roboto-1.woff2";
+import openSansFont from "../assets/fonts/open-sans-1.woff2";
+import montserratFont from "../assets/fonts/montserrat-1.woff2";
+import poppinsFont from "../assets/fonts/poppins-1.woff2";
+import latoFont from "../assets/fonts/lato-1.woff2";
+import sourceCodeProFont from "../assets/fonts/source-code-pro-1.woff2";
+
 // Static font configurations based on available local fonts
 const LOCAL_FONT_CONFIGS: FontConfig[] = [
 	{
@@ -9,7 +17,7 @@ const LOCAL_FONT_CONFIGS: FontConfig[] = [
 		isLocalFont: true,
 		source: "local",
 		variants: ["400"],
-		localPath: "/src/assets/fonts/roboto-1.woff2",
+		localPath: robotoFont,
 	},
 	{
 		name: "Open Sans",
@@ -18,7 +26,7 @@ const LOCAL_FONT_CONFIGS: FontConfig[] = [
 		isLocalFont: true,
 		source: "local",
 		variants: ["400"],
-		localPath: "/src/assets/fonts/open-sans-1.woff2",
+		localPath: openSansFont,
 	},
 	{
 		name: "Montserrat",
@@ -27,7 +35,7 @@ const LOCAL_FONT_CONFIGS: FontConfig[] = [
 		isLocalFont: true,
 		source: "local",
 		variants: ["400"],
-		localPath: "/src/assets/fonts/montserrat-1.woff2",
+		localPath: montserratFont,
 	},
 	{
 		name: "Poppins",
@@ -36,7 +44,7 @@ const LOCAL_FONT_CONFIGS: FontConfig[] = [
 		isLocalFont: true,
 		source: "local",
 		variants: ["400"],
-		localPath: "/src/assets/fonts/poppins-1.woff2",
+		localPath: poppinsFont,
 	},
 	{
 		name: "Lato",
@@ -45,7 +53,7 @@ const LOCAL_FONT_CONFIGS: FontConfig[] = [
 		isLocalFont: true,
 		source: "local",
 		variants: ["400"],
-		localPath: "/src/assets/fonts/lato-1.woff2",
+		localPath: latoFont,
 	},
 	{
 		name: "Source Code Pro",
@@ -54,7 +62,7 @@ const LOCAL_FONT_CONFIGS: FontConfig[] = [
 		isLocalFont: true,
 		source: "local",
 		variants: ["400"],
-		localPath: "/src/assets/fonts/source-code-pro-1.woff2",
+		localPath: sourceCodeProFont,
 	},
 ];
 

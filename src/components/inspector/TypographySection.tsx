@@ -103,6 +103,7 @@ export function TypographySection({
 								onChange={handleFontFamilyChange}
 								className="input-field"
 								disabled={currentFontLoadingState === "loading"}
+								elementId={element.id}
 							/>
 							{currentFontLoadingState === "loading" && (
 								<div

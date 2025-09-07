@@ -5,6 +5,7 @@ import type {
 } from "../types/canvaskit";
 import { fontCacheManager } from "./font-cache-manager";
 import { generateLocalFontConfigs } from "./local-font-config";
+import interFont from "../assets/fonts/inter-1.woff2";
 
 // Font variant data interface
 export interface FontVariantData {
@@ -46,7 +47,7 @@ export const DEFAULT_FONT: FontConfig = {
 	isLocalFont: true,
 	isWebFont: true,
 	variants: ["400"],
-	localPath: "/src/assets/fonts/inter-1.woff2",
+	localPath: interFont,
 };
 
 // Local fonts available in the application
@@ -220,11 +221,8 @@ class FontManager {
 		}
 
 		try {
-			// Import the font file as a module to get the URL
-			const fontModule = await import(fontConfig.localPath);
-			const fontUrl = fontModule.default || fontModule;
-
-			const response = await fetch(fontUrl);
+			// localPath is now a URL string from Vite asset imports
+			const response = await fetch(fontConfig.localPath);
 			if (!response.ok) {
 				throw new Error(`Failed to fetch local font: ${response.statusText}`);
 			}
